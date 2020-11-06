@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noEmitOnError": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false, // ! Turn this back on later
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "strict": true,
