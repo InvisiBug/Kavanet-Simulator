@@ -1,4 +1,4 @@
-import mqtt, { MqttClient } from "mqtt";
+import { MqttClient } from "mqtt";
 
 export default class Sun {
   nodeName = "Sun";

@@ -2,9 +2,9 @@ import chalk from "chalk";
 import mqtt from "mqtt";
 
 import Sun from "./app/Devices/Sun";
-import { plugMqtt, plugControl } from "./app/Devices/Plug";
-import { computerAudioMqtt, computerAudioControl } from "./app/Devices/ComputerAudio";
-import { heatingSensor } from "./app/Devices/HeatingSensor";
+import Plug from "./app/Devices/Plug";
+import { computerAudioControl } from "./app/Devices/ComputerAudio";
+import HeatingSensor from "./app/Devices/HeatingSensor";
 import Heating from "./app/Devices/Heating";
 
 // TODO Look at d.ts file (a decleration meaning you dont need to import types)
@@ -13,21 +13,24 @@ console.clear();
 let client = mqtt.connect("mqtt://localhost");
 // let client = mqtt.connect("mqtt://kavanet.io");
 
-const sunDevice: Sun = new Sun(client);
-const heatingDevice: Heating = new Heating(client);
-
-setInterval(() => {
-  sunDevice.publish();
-  heatingDevice.publish();
-}, 5 * 1000);
-
 client.subscribe("#", (err) => {
   err ? console.log(err) : console.log("Subscribed to all");
 });
 
 client.on("connect", () => null);
 
-// client.on("message", (topic, payload) => console.log(chalk.white("Topic: " + topic) + chalk.cyan(" \t" + payload)));
+// Devices
+const sunDevice: Sun = new Sun(client);
+const heatingDevice: Heating = new Heating(client);
+const plugDevice: Plug = new Plug(client);
+
+// Device Updates
+setInterval(() => {
+  sunDevice.publish();
+  heatingDevice.publish();
+  ourRoomHeatingSensor.publish();
+  plugDevice.publish();
+}, 5 * 1000);
 
 client.on("message", (topic, payload) => {
   let message = payload.toString();
@@ -37,7 +40,7 @@ client.on("message", (topic, payload) => {
       break;
 
     case "plugControl":
-      plugControl(message);
+      plugDevice.message(message);
       break;
 
     case "computerAudioControl":
@@ -50,12 +53,11 @@ client.on("message", (topic, payload) => {
   }
 });
 
-// Mqtt
-plugMqtt();
-computerAudioMqtt();
+// const sensors = ["Our Room", "Study", "Living Room", "Kitchen", "Liams Room"];
 
-const sensors = ["Our Room", "Study", "Living Room", "Kitchen", "Liams Room"];
+// sensors.map((room) => { // how do you assign
+//   // heatingSensor(room);
+//   var
+// });
 
-sensors.map((room) => {
-  heatingSensor(room);
-});
+const ourRoomHeatingSensor = new HeatingSensor(client, "Our Room");

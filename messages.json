@@ -1,0 +1,14 @@
+{"Node":"Plug","state":true}
+{"node":"Sun","state":false}
+{"node":"Our Room Heating Sensor","temperature":15.1,"humidity":60.6,"pressure":101431.2,"battery":-150}
+{"Node":"Screen LEDs","red":109,"green":14,"blue":130,"mode":0}
+{"node":"Living Room Heating Sensor","temperature":16,"humidity":72.5,"pressure":101604.8,"battery":96}
+{"Node":"Computer Audio","Left":true,"Right":true,"Sub":true,"Mixer":true}
+{"node":"Liams Room Heating Sensor","temperature":16.6,"humidity":75.1,"pressure":101503.2,"battery":-149}
+{"node":"Kitchen Heating Sensor","temperature":21.6,"humidity":75,"pressure":62331.41,"battery":-148}
+{"Node":"Liams Computer Audio","Left":false,"Right":false}
+{"Node":"Desk LEDs","red":53,"green":50,"blue":129}
+{"node":"Study Heating Sensor","temperature":23.1,"humidity":45.2,"pressure":101534.7,"battery":-149}
+{"Node":"Computer Power","state":false}
+{"Node":"Table Lamp","red":255,"green":100,"blue":0}
+{"Node":"Plug","state":true}
