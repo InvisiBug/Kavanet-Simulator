@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
+    "target": "ES2018",
     "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
     "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "dist"
-  }, 
-  "lib": ["es2015"]
+    "esModuleInterop": true,
+    "noEmitOnError": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "outDir": "dist/"
+  },
+  "include": [
+    "src/*"
+  ]
 }
