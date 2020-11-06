@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import mqtt from "mqtt";
 
-import { sunMqtt, sunControl } from "./app/Devices/Sun";
+import Sun from "./app/Devices/Sun";
 import { plugMqtt, plugControl } from "./app/Devices/Plug";
 import { computerAudioMqtt, computerAudioControl } from "./app/Devices/ComputerAudio";
 import { heatingSensor } from "./app/Devices/HeatingSensor";
@@ -12,6 +12,12 @@ import { heatingMqtt, heatingControl } from "./app/Devices/Heating";
 console.clear();
 let client = mqtt.connect("mqtt://localhost");
 // let client = mqtt.connect("mqtt://kavanet.io");
+
+const sunDevice: Sun = new Sun(client);
+
+setInterval(() => {
+  sunDevice.publish();
+}, 5 * 1000);
 
 client.subscribe("#", (err) => {
   err ? console.log(err) : console.log("Subscribed to all");
@@ -25,7 +31,7 @@ client.on("message", (topic, payload) => {
   let message = payload.toString();
   switch (topic) {
     case "Sun Control":
-      sunControl(message);
+      sunDevice.message(message);
       break;
 
     case "plugControl":
@@ -43,7 +49,6 @@ client.on("message", (topic, payload) => {
 });
 
 // Mqtt
-sunMqtt();
 plugMqtt();
 computerAudioMqtt();
 heatingMqtt();
