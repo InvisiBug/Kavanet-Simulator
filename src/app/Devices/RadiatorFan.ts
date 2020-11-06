@@ -1,6 +1,6 @@
 import mqtt, { MqttClient } from "mqtt";
-export default class Heating {
-  nodeName = "Heating";
+export default class RadiatorFan {
+  nodeName = "Radiator Fan";
   state = true;
   client; // Dont need to add type info here as its explicitly declared in the constructor
 
@@ -10,14 +10,14 @@ export default class Heating {
   }
 
   message(message: string) {
-    if (message === "1") {
-      this.state = true;
-    } else if (message === "0") {
-      this.state = false;
-    } else {
-      console.error("invalid message");
-    }
-    this.publish();
+    // if (message === "1") {
+    //   this.isOn = true;
+    // } else if (message === "0") {
+    //   this.isOn = false;
+    // } else {
+    //   console.error("invalid message");
+    // }
+    let x = message;
   }
 
   publish() {

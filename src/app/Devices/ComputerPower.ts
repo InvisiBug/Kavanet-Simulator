@@ -1,11 +1,9 @@
-import { MqttClient } from "mqtt";
+import mqtt, { MqttClient } from "mqtt";
 
-export default class Plug {
-  nodeName = "Plug";
+export default class ComputerPower {
+  nodeName = "Computer Power";
   state = true;
-  client;
-
-  // constructor(private client: MqttClient) { } // Typesript weird
+  client; // Dont need to add type info here as its explicitly declared in the constructor
 
   constructor(client: MqttClient) {
     this.client = client; // Explicit from MqttClient
@@ -21,6 +19,7 @@ export default class Plug {
       console.error("invalid message");
     }
     this.publish();
+    console.log(message);
   }
 
   publish() {

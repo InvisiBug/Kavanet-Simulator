@@ -11,4 +11,31 @@
 {"node":"Study Heating Sensor","temperature":23.1,"humidity":45.2,"pressure":101534.7,"battery":-149}
 {"Node":"Computer Power","state":false}
 {"Node":"Table Lamp","red":255,"green":100,"blue":0}
-{"Node":"Plug","state":true}
+{"Node":"Heating","state":true}
+
+
+
+
+Sun
+Plug
+Radiator Fan
+Heating
+Computer Power
+
+Desk LEDs
+Screen LEDs
+Table Lamp
+
+Computer Audio
+
+Living Room Heating Sensor
+Kitchen Heating Sensor
+Liams Room Heating Sensor
+Study Heating Sensor
+Our Room Heating Sensor
+
+
+conputer audio
+computer power
+desk leds
+kitchen heating sensr

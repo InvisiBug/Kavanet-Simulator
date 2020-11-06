@@ -1,27 +1,47 @@
-import mqtt from "mqtt";
+import { MqttClient } from "mqtt";
 
-var deviceData = {
-  isConnected: true,
-  isOn: true,
-};
+export default class ComputerAudio {
+  nodeName = "Computer Audio";
+  left = true;
+  right = true;
+  sub = true;
+  mixer = true;
+  client;
 
-export const computerAudioControl = (message: string) => {
-  if (message === "1") {
-    deviceData.isOn = true;
-  } else if (message === "0") {
-    deviceData.isOn = false;
+  // constructor(private client: MqttClient) { } // Typesript weird
+
+  constructor(client: MqttClient) {
+    this.client = client; // Explicit from MqttClient
+    this.publish();
   }
-};
 
-export const computerAudioMqtt = () => {
-  let client = mqtt.connect("mqtt://localHost");
+  message(message: string) {
+    if (message === "1") {
+      this.left = true;
+      this.right = true;
+      this.sub = true;
+      this.mixer = true;
+    } else if (message === "0") {
+      this.left = false;
+      this.right = false;
+      this.sub = false;
+      this.mixer = false;
+    } else {
+      console.error("invalid message");
+    }
+    this.publish();
+  }
 
-  setInterval(() => {
-    publish();
-  }, 1000);
-};
-
-const publish = () => {
-  let client = mqtt.connect("mqtt://localHost");
-  client.publish("Computer Audio", JSON.stringify(deviceData));
-};
+  publish() {
+    this.client.publish(
+      `${this.nodeName}`,
+      JSON.stringify({
+        node: this.nodeName,
+        Left: this.left,
+        Right: this.right,
+        Sub: this.sub,
+        Mixer: this.mixer,
+      }),
+    );
+  }
+}

@@ -1,7 +1,6 @@
 import { MqttClient } from "mqtt";
 export default class HeatingSensor {
   nodeName: string;
-  isConnected = true;
   temperature = 15.5;
   humidity = 59.9;
   pressure = 101459.2;
@@ -13,6 +12,7 @@ export default class HeatingSensor {
   constructor(client: MqttClient, nodeName: string) {
     this.client = client; // Explicit from MqttClient
     this.nodeName = nodeName;
+    this.publish();
   }
 
   // message(message: string) {}
@@ -22,7 +22,6 @@ export default class HeatingSensor {
       `${this.nodeName} Heating Sensor`,
       JSON.stringify({
         node: `${this.nodeName} Heating Sensor`,
-        isConnected: this.isConnected,
         temperature: this.temperature,
         humidity: this.humidity,
         pressure: this.pressure,
