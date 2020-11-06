@@ -1,25 +1,35 @@
-import mqtt from "mqtt";
+import mqtt, { MqttClient } from "mqtt";
 
-var deviceData = {
-  isConnected: true,
-  isOn: true,
-};
+export default class Sun {
+  nodeName = "Sun";
+  isConnected = true;
+  isOn = true;
+  client;
 
-export const sunControl = (message: string) => {
-  if (message === "1") {
-    deviceData.isOn = true;
-  } else if (message === "0") {
-    deviceData.isOn = false;
+  // constructor(private client: MqttClient) { } // Typesript weird
+
+  constructor(client: MqttClient) {
+    this.client = client; // Explicit from MqttClient
   }
-};
 
-export const sunMqtt = () => {
-  setInterval(() => {
-    publish();
-  }, 5 * 1000);
-};
+  message(message: string) {
+    if (message === "1") {
+      this.isOn = true;
+    } else if (message === "0") {
+      this.isOn = false;
+    } else {
+      console.error("invalid message");
+    }
+  }
 
-const publish = () => {
-  let client = mqtt.connect("mqtt://localHost");
-  client.publish("Sun", JSON.stringify(deviceData));
-};
+  publish() {
+    this.client.publish(
+      "Sun",
+      JSON.stringify({
+        node: this.nodeName,
+        isOn: this.isOn,
+        isConnected: this.isConnected,
+      }),
+    );
+  }
+}
