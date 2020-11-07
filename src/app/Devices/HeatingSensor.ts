@@ -5,7 +5,6 @@ export default class HeatingSensor {
   temperature: number = 20;
   humidity: number = 59.9;
   pressure: number = 101459.2;
-  battery: number = -150;
 
   lastSent: number;
   client: MqttClient; // Dont need to add type info here as its explicitly declared in the constructor
@@ -25,7 +24,6 @@ export default class HeatingSensor {
         temperature: this.temperature,
         humidity: this.humidity,
         pressure: this.pressure,
-        battery: this.battery,
       }),
     );
   }
