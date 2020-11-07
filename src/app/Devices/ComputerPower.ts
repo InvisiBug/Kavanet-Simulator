@@ -1,13 +1,16 @@
 import mqtt, { MqttClient } from "mqtt";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
 
 export default class ComputerPower {
   nodeName = "Computer Power";
-  state = true;
-  client; // Dont need to add type info here as its explicitly declared in the constructor
+  state: boolean = true;
+  lastSent: number;
+  client: MqttClient; // Dont need to add type info here as its explicitly declared in the constructor
 
   constructor(client: MqttClient) {
     this.client = client; // Explicit from MqttClient
-    this.publish();
+    this.lastSent = randFutureTime();
+    publishOnConnect() ? this.publish() : null;
   }
 
   message(message: string) {
@@ -19,7 +22,6 @@ export default class ComputerPower {
       console.error("invalid message");
     }
     this.publish();
-    console.log(message);
   }
 
   publish() {
@@ -30,5 +32,13 @@ export default class ComputerPower {
         state: this.state,
       }),
     );
+  }
+
+  tick() {
+    let now = new Date();
+    if (shouldUpdate(this.lastSent)) {
+      this.lastSent = now.getTime();
+      this.publish();
+    }
   }
 }

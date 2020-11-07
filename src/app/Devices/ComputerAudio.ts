@@ -1,18 +1,19 @@
 import { MqttClient } from "mqtt";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
 
 export default class ComputerAudio {
   nodeName = "Computer Audio";
-  left = true;
-  right = true;
-  sub = true;
-  mixer = true;
-  client;
-
-  // constructor(private client: MqttClient) { } // Typesript weird
+  left: boolean = true;
+  right: boolean = true;
+  sub: boolean = true;
+  mixer: boolean = true;
+  lastSent: number;
+  client: MqttClient;
 
   constructor(client: MqttClient) {
     this.client = client; // Explicit from MqttClient
-    this.publish();
+    this.lastSent = randFutureTime();
+    publishOnConnect() ? this.publish() : null;
   }
 
   message(message: string) {
@@ -43,5 +44,13 @@ export default class ComputerAudio {
         Mixer: this.mixer,
       }),
     );
+  }
+
+  tick() {
+    let now = new Date();
+    if (shouldUpdate(this.lastSent)) {
+      this.lastSent = now.getTime();
+      this.publish();
+    }
   }
 }

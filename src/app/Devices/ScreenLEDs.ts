@@ -1,26 +1,22 @@
 import { MqttClient } from "mqtt";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
 
 export default class ScreenLEDs {
   nodeName = "Screen LEDs";
-  red = 255;
-  green = 255;
-  blue = 255;
-  mode = 0;
+  red: number = 255;
+  green: number = 255;
+  blue: number = 255;
+  mode: number = 0;
+  lastSent: number;
   client;
 
   constructor(client: MqttClient) {
     this.client = client; // Explicit from MqttClient
-    this.publish();
+    this.lastSent = randFutureTime();
+    publishOnConnect() ? this.publish() : null;
   }
 
   message(message: string) {
-    // if (message === "1") {
-    //   this.isOn = true;
-    // } else if (message === "0") {
-    //   this.isOn = false;
-    // } else {
-    //   console.error("invalid message");
-    // }
     let x = message;
   }
 
@@ -35,5 +31,13 @@ export default class ScreenLEDs {
         mode: this.mode,
       }),
     );
+  }
+
+  tick() {
+    let now = new Date();
+    if (shouldUpdate(this.lastSent)) {
+      this.lastSent = now.getTime();
+      this.publish();
+    }
   }
 }

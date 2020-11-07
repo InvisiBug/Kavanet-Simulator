@@ -1,15 +1,16 @@
 import { MqttClient } from "mqtt";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
 
 export default class Plug {
-  nodeName = "Plug";
-  state = true;
-  client;
-
-  // constructor(private client: MqttClient) { } // Typesript weird
+  nodeName: string = "Plug";
+  state: boolean = true;
+  lastSent: number;
+  client: MqttClient;
 
   constructor(client: MqttClient) {
-    this.client = client; // Explicit from MqttClient
-    this.publish();
+    this.client = client;
+    this.lastSent = randFutureTime();
+    publishOnConnect() ? this.publish() : null;
   }
 
   message(message: string) {
@@ -31,5 +32,13 @@ export default class Plug {
         state: this.state,
       }),
     );
+  }
+
+  tick() {
+    let now = new Date();
+    if (shouldUpdate(this.lastSent)) {
+      this.lastSent = now.getTime();
+      this.publish();
+    }
   }
 }

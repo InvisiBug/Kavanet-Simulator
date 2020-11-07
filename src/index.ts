@@ -1,4 +1,5 @@
 import mqtt from "mqtt";
+import chalk from "chalk";
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -41,6 +42,11 @@ let client = mqtt.connect("mqtt://localhost");
 
 client.subscribe("#", (err) => {
   err ? console.log(err) : console.log("Subscribed to all");
+});
+// client.on("message", (topic, payload) => console.log(chalk.white("Topic: " + topic) + chalk.cyan(" \t" + payload)));
+client.on("message", (_, payload) => {
+  // console.log(chalk.white("Topic: " + topic) + chalk.cyan(" \t" + payload))
+  console.log(chalk.yellow(payload.toString()));
 });
 
 client.on("connect", () => console.log("Simulator Connected"));
@@ -88,24 +94,22 @@ const ourRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Our Room"
 ////////////////////////////////////////////////////////////////////////
 // Device Updates
 setInterval(() => {
-  sunDevice.publish();
-  plugDevice.publish();
-  radiatorFanDevice.publish();
-  heatingDevice.publish();
-  computerPowerDevice.publish();
-
-  deskLEDsDevice.publish();
-  screenLEDsDevice.publish();
-  tableLampDevice.publish();
-
-  computerAudioDevice.publish();
-
-  livingRoomHeatingSensor.publish();
-  kitchenHeatingSensor.publish();
-  liamsRoomheatingSensor.publish();
-  studyHeatingSensor.publish();
-  ourRoomHeatingSensor.publish();
-}, 5 * 1000);
+  sunDevice.tick();
+  plugDevice.tick();
+  radiatorFanDevice.tick();
+  heatingDevice.tick();
+  computerPowerDevice.tick();
+  deskLEDsDevice.tick();
+  screenLEDsDevice.tick();
+  tableLampDevice.tick();
+  computerAudioDevice.tick();
+  livingRoomHeatingSensor.tick();
+  kitchenHeatingSensor.tick();
+  liamsRoomheatingSensor.tick();
+  studyHeatingSensor.tick();
+  ourRoomHeatingSensor.tick();
+  // console.log("tick");
+}, 10);
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -125,20 +129,46 @@ client.on("message", (topic, payload) => {
       sunDevice.message(message);
       break;
 
-    case "Plug Control":
-      plugDevice.message(message);
-      break;
+    // case "Plug Control":
+    //   plugDevice.message(message);
+    //   break;
 
-    case "Computer Audio Control":
-      computerAudioDevice.message(message);
-      break;
+    // case "Computer Audio Control":
+    //   computerAudioDevice.message(message);
+    //   break;
 
-    case "Heating Control":
-      heatingDevice.message(message);
-      break;
+    // case "Heating Control":
+    //   heatingDevice.message(message);
+    //   break;
 
-    case "Computer Power Control":
-      computerPowerDevice.message(message);
-      break;
+    // case "Computer Power Control":
+    //   computerPowerDevice.message(message);
+    //   break;
+
+    // TODO, Add all control topics
   }
 });
+// //This adds the the line printed information to all console.logs
+// ["log", "warn", "error"].forEach((methodName) => {
+//   const originalMethod = console[methodName];
+//   console[methodName] = (...args) => {
+//     try {
+//       throw new Error();
+//     } catch (error) {
+//       originalMethod.apply(console, [
+//         ...args,
+//         chalk.yellow(
+//           "\t",
+//           error.stack // Grabs the stack trace
+//             .split("\n")[2] // Grabs third line
+//             .trim(3) // Removes spaces
+//             .replace(__dirname, "") // Removes script folder path
+//             .replace(/\s\(./, " ") // Removes first parentheses and replaces it with " at "
+//             .replace(/\)/, "") // Removes last parentheses
+//             .split(" ")
+//             .pop(),
+//         ),
+//       ]);
+//     }
+//   };
+// });
