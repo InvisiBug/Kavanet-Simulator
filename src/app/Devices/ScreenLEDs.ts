@@ -3,21 +3,30 @@ import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Fu
 
 export default class ScreenLEDs {
   nodeName = "Screen LEDs";
-  red: number = 255;
-  green: number = 255;
-  blue: number = 255;
+  red: number = 0;
+  green: number = 0;
+  blue: number = 0;
   mode: number = 0;
   lastSent: number;
   client;
 
   constructor(client: MqttClient) {
-    this.client = client; // Explicit from MqttClient
+    this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
 
   message(message: string) {
-    let x = message;
+    if (message === "1") {
+      this.mode = 1;
+    } else if (message === "0") {
+      this.mode = 0;
+    } else {
+      this.red = JSON.parse(message).red;
+      this.green = JSON.parse(message).green;
+      this.blue = JSON.parse(message).blue;
+    }
+    this.publish();
   }
 
   publish() {

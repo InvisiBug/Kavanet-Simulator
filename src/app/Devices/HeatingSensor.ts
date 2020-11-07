@@ -2,7 +2,7 @@ import { MqttClient } from "mqtt";
 import { randFutureTime, shouldUpdate, publishOnConnect } from "../../Helpers/Functions";
 export default class HeatingSensor {
   nodeName: string;
-  temperature: number = 15.5;
+  temperature: number = 20;
   humidity: number = 59.9;
   pressure: number = 101459.2;
   battery: number = -150;

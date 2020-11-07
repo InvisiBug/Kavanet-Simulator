@@ -45,8 +45,8 @@ client.subscribe("#", (err) => {
 });
 // client.on("message", (topic, payload) => console.log(chalk.white("Topic: " + topic) + chalk.cyan(" \t" + payload)));
 client.on("message", (_, payload) => {
-  // console.log(chalk.white("Topic: " + topic) + chalk.cyan(" \t" + payload))
-  console.log(chalk.yellow(payload.toString()));
+  console.log(chalk.white("Topic: " + _) + chalk.cyan(" \t" + payload));
+  // console.log(chalk.yellow(payload.toString()));
 });
 
 client.on("connect", () => console.log("Simulator Connected"));
@@ -124,14 +124,39 @@ setInterval(() => {
 ////////////////////////////////////////////////////////////////////////
 client.on("message", (topic, payload) => {
   let message = payload.toString();
+
   switch (topic) {
     case "Sun Control":
       sunDevice.message(message);
       break;
 
-    // case "Plug Control":
-    //   plugDevice.message(message);
-    //   break;
+    case "Plug Control":
+      plugDevice.message(message);
+      break;
+
+    case "Radiator Fan Control":
+      radiatorFanDevice.message(message);
+      break;
+
+    case "Heating Control":
+      heatingDevice.message(message);
+      break;
+
+    case "Computer Power Control":
+      computerPowerDevice.message(message);
+      break;
+
+    case "Desk LED Control":
+      deskLEDsDevice.message(message);
+      break;
+
+    case "Screen LEDs Control":
+      screenLEDsDevice.message(message);
+      break;
+
+    case "Table Lamp Control":
+      tableLampDevice.message(message);
+      break;
 
     // case "Computer Audio Control":
     //   computerAudioDevice.message(message);

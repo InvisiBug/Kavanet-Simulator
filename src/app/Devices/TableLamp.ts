@@ -16,7 +16,10 @@ export default class TableLamp {
   }
 
   message(message: string) {
-    let x = message;
+    this.red = JSON.parse(message).red;
+    this.green = JSON.parse(message).green;
+    this.blue = JSON.parse(message).blue;
+    this.publish();
   }
 
   publish() {

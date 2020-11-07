@@ -2,9 +2,9 @@ import { MqttClient } from "mqtt";
 import { randFutureTime, shouldUpdate, publishOnConnect } from "../../Helpers/Functions";
 export default class DeskLEDs {
   nodeName = "Desk LEDs";
-  red: number = 255;
-  green: number = 255;
-  blue: number = 255;
+  red: number = 0;
+  green: number = 0;
+  blue: number = 0;
   lastSent: number;
   client: MqttClient;
 
@@ -15,7 +15,10 @@ export default class DeskLEDs {
   }
 
   message(message: string) {
-    let x = message;
+    this.red = JSON.parse(message).red;
+    this.green = JSON.parse(message).green;
+    this.blue = JSON.parse(message).blue;
+    this.publish();
   }
 
   publish() {

@@ -7,12 +7,12 @@ This is a simulator for Kavanet so development can occur alongside normal day to
 - [x] Sun
 - [x] Plug
 - [x] Radiator Fan
-- [ ] Heating
-- [ ] Computer Power
+- [x] Heating
+- [x] Computer Power
 
-- [ ] Desk LEDs
-- [ ] Screen LEDs
-- [ ] Table Lamp
+- [x] Desk LEDs
+- [x] Screen LEDs
+- [x] Table Lamp
 
 - [x] Computer Audio
 
@@ -28,88 +28,89 @@ This is a simulator for Kavanet so development can occur alongside normal day to
 
 # Completed Nodes
 ## Sun
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 ## Plug
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 ## Radiator Fan
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 ## Heating
-- [ ] Client
+- [x] Client
 - [ ] Controller
-- [ ] Simulator
+- [x] Simulator
 
 
 ## Computer Power
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 ## Desk LEDs
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 ## Screen LEDs
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 ## Table Lamp
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 ## Computer Audio
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
+ive messed about with the client code, will cause issues for a while
 
 ## Living Room Heating Sensor
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 ## Kitchen Heating Sensor
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 ## Liams Room Heating Sensor
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 ## Study Heating Sensor
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 ## Our Room Heating Sensor
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 
 ##  Nodes
-- [ ] Client
-- [ ] Controller
-- [ ] Simulator
+- [x] Client
+- [x] Controller
+- [x] Simulator
 
 
 {"Node":"Plug","state":true}

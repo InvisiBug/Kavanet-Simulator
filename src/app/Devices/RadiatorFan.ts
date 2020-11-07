@@ -1,8 +1,8 @@
 import mqtt, { MqttClient } from "mqtt";
 import { randFutureTime, shouldUpdate, publishOnConnect } from "../../Helpers/Functions";
 export default class RadiatorFan {
-  nodeName = "Radiator Fan";
-  state = false;
+  nodeName: string = "Radiator Fan";
+  state: boolean = false;
   lastSent: number;
   client: MqttClient;
 

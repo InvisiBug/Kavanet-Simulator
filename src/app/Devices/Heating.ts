@@ -5,10 +5,10 @@ export default class Heating {
   nodeName: string = "Heating";
   state: boolean = false;
   lastSent: number;
-  client: MqttClient; // Dont need to add type info here as its explicitly declared in the constructor
+  client: MqttClient;
 
   constructor(client: MqttClient) {
-    this.client = client; // Explicit from MqttClient
+    this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
