@@ -10,7 +10,7 @@ export default class HeatingSensor {
   client: MqttClient; // Dont need to add type info here as its explicitly declared in the constructor
 
   constructor(client: MqttClient, nodeName: string) {
-    this.client = client; // Explicit from MqttClient
+    this.client = client;
     this.nodeName = nodeName;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;

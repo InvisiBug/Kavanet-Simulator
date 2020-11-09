@@ -22,6 +22,7 @@ import ScreenLEDs from "./app/Devices/ScreenLEDs";
 import TableLamp from "./app/Devices/TableLamp";
 import RadiatorFan from "./app/Devices/RadiatorFan";
 import ComputerPower from "./app/Devices/ComputerPower";
+import RadiatorValve from "./app/Devices/RadiatorValve";
 
 // TODO Look at d.ts file (a decleration meaning you dont need to import types)
 
@@ -41,7 +42,7 @@ let client = mqtt.connect("mqtt://localhost");
 // let client = mqtt.connect("mqtt://kavanet.io");
 
 client.subscribe("#", (err) => {
-  err ? console.log(err) : console.log("Subscribed to all");
+  err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
 });
 
 client.on("message", (_, payload) => {
@@ -81,6 +82,12 @@ const liamsRoomheatingSensor: HeatingSensor = new HeatingSensor(client, "Liams R
 const studyHeatingSensor: HeatingSensor = new HeatingSensor(client, "Study");
 const ourRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Our Room");
 
+const livingRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Living Room");
+const kitchenRadiatorValve: RadiatorValve = new RadiatorValve(client, "Kitchen");
+const liamsRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Liams Room");
+const studyRadiatorValve: RadiatorValve = new RadiatorValve(client, "Study");
+const ourRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Our Room");
+
 ////////////////////////////////////////////////////////////////////////
 //
 // #     #
@@ -94,20 +101,34 @@ const ourRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Our Room"
 ////////////////////////////////////////////////////////////////////////
 // Device Updates
 setInterval(() => {
+  // Lights
   sunDevice.tick();
   plugDevice.tick();
-  radiatorFanDevice.tick();
-  heatingDevice.tick();
-  computerPowerDevice.tick();
   deskLEDsDevice.tick();
   screenLEDsDevice.tick();
   tableLampDevice.tick();
+
+  // Misc Heating
+  radiatorFanDevice.tick();
+  heatingDevice.tick();
+
+  // Computer
+  computerPowerDevice.tick();
   computerAudioDevice.tick();
+
+  // Heating Sensors
   livingRoomHeatingSensor.tick();
   kitchenHeatingSensor.tick();
   liamsRoomheatingSensor.tick();
   studyHeatingSensor.tick();
   ourRoomHeatingSensor.tick();
+
+  // Radiator Valves
+  livingRoomRadiatorValve.tick();
+  kitchenRadiatorValve.tick();
+  liamsRoomRadiatorValve.tick();
+  studyRadiatorValve.tick();
+  ourRoomRadiatorValve.tick();
 }, 10);
 
 ////////////////////////////////////////////////////////////////////////
@@ -155,6 +176,26 @@ client.on("message", (topic, payload) => {
 
     case "Table Lamp Control":
       tableLampDevice.message(message);
+      break;
+
+    case "Living Room Radiator Valve Control":
+      livingRoomRadiatorValve.message(message);
+      break;
+
+    case "Kitchen Radiator Valve Control":
+      kitchenRadiatorValve.message(message);
+      break;
+
+    case "Liams Room Radiator Valve Control":
+      liamsRoomRadiatorValve.message(message);
+      break;
+
+    case "Study Radiator Valve Control":
+      studyRadiatorValve.message(message);
+      break;
+
+    case "Our Room Radiator Valve Control":
+      ourRoomRadiatorValve.message(message);
       break;
   }
 });
