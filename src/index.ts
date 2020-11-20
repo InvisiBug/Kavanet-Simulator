@@ -106,6 +106,7 @@ setInterval(() => {
   plugDevice.tick();
   deskLEDsDevice.tick();
   screenLEDsDevice.tick();
+  screenLEDsDevice.tick();
   tableLampDevice.tick();
 
   // Misc Heating
