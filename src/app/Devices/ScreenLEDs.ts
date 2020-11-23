@@ -1,11 +1,11 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
+import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../Helpers/Functions";
 
 export default class ScreenLEDs {
   nodeName = "Screen LEDs";
-  red: number = 0;
-  green: number = 0;
-  blue: number = 0;
+  red: number = randBetween(0, 255);
+  green: number = randBetween(0, 255);
+  blue: number = randBetween(0, 255);
   mode: number = 0;
   lastSent: number;
   client;

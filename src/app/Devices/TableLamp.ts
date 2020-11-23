@@ -1,16 +1,16 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
+import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../Helpers/Functions";
 
 export default class TableLamp {
   nodeName = "Table Lamp";
-  red: number = 255;
-  green: number = 255;
-  blue: number = 255;
+  red: number = randBetween(0, 255);
+  green: number = randBetween(0, 255);
+  blue: number = randBetween(0, 255);
   lastSent: number;
   client: MqttClient;
 
   constructor(client: MqttClient) {
-    this.client = client; // Explicit from MqttClient
+    this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
