@@ -46,7 +46,7 @@ client.subscribe("#", (err) => {
 });
 
 client.on("message", (_, payload) => {
-  // console.log(chalk.white("Topic: " + _) + chalk.cyan(" \t" + payload));
+  // console.log(chalk.white(_) + chalk.cyan(" \t" + payload));
   console.log(chalk.yellow(payload.toString()));
 });
 
@@ -76,14 +76,14 @@ const tableLampDevice: TableLamp = new TableLamp(client);
 
 const computerAudioDevice: ComputerAudio = new ComputerAudio(client);
 
-const livingRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Living Room");
-const kitchenHeatingSensor: HeatingSensor = new HeatingSensor(client, "Kitchen");
-const liamsRoomheatingSensor: HeatingSensor = new HeatingSensor(client, "Liams Room");
-const studyHeatingSensor: HeatingSensor = new HeatingSensor(client, "Study");
-const ourRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Our Room");
+const livingRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Living Room", 16);
+const kitchenHeatingSensor: HeatingSensor = new HeatingSensor(client, "Kitchen", 16);
+const liamsRoomheatingSensor: HeatingSensor = new HeatingSensor(client, "Liams Room", 16);
+const studyHeatingSensor: HeatingSensor = new HeatingSensor(client, "Study", 16);
+const ourRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Our Room", 16);
 
 const livingRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Living Room");
-const kitchenRadiatorValve: RadiatorValve = new RadiatorValve(client, "Kitchen");
+// const kitchenRadiatorValve: RadiatorValve = new RadiatorValve(client, "Kitchen");
 const liamsRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Liams Room");
 const studyRadiatorValve: RadiatorValve = new RadiatorValve(client, "Study");
 const ourRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Our Room");
@@ -126,7 +126,7 @@ setInterval(() => {
 
   // Radiator Valves
   livingRoomRadiatorValve.tick();
-  kitchenRadiatorValve.tick();
+  // kitchenRadiatorValve.tick();
   liamsRoomRadiatorValve.tick();
   studyRadiatorValve.tick();
   ourRoomRadiatorValve.tick();
@@ -183,9 +183,9 @@ client.on("message", (topic, payload) => {
       livingRoomRadiatorValve.message(message);
       break;
 
-    case "Kitchen Radiator Valve Control":
-      kitchenRadiatorValve.message(message);
-      break;
+    // case "Kitchen Radiator Valve Control":
+    //   kitchenRadiatorValve.message(message);
+    //   break;
 
     case "Liams Room Radiator Valve Control":
       liamsRoomRadiatorValve.message(message);

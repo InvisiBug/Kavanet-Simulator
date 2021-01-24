@@ -1,18 +1,24 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect } from "../../Helpers/Functions";
+import { randFutureTime, shouldUpdate, publishOnConnect, randInteger } from "../../Helpers/Functions";
 export default class HeatingSensor {
   nodeName: string;
-  temperature: number = 20;
-  humidity: number = 59.9;
+  temperature: number;
+  humidity: number = 10;
   pressure: number = 101459.2;
 
-  lastSent: number;
+  timeToSend: number;
   client: MqttClient; // Dont need to add type info here as its explicitly declared in the constructor
 
-  constructor(client: MqttClient, nodeName: string) {
+  count: number = 0;
+
+  min: number = 12;
+  max: number = 23;
+
+  constructor(client: MqttClient, nodeName: string, temperature: number) {
+    this.temperature = temperature;
     this.client = client;
     this.nodeName = nodeName;
-    this.lastSent = randFutureTime();
+    this.timeToSend = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
 
@@ -29,10 +35,23 @@ export default class HeatingSensor {
   }
 
   tick() {
-    let now = new Date();
-    if (shouldUpdate(this.lastSent)) {
-      this.lastSent = now.getTime();
+    let now = new Date().getTime();
+    if (shouldUpdate(this.timeToSend)) {
+      this.timeToSend = now;
       this.publish();
+
+      this.count += 1;
+
+      if (this.count === 4) {
+        this.count = 0;
+        if (this.temperature > this.min && this.temperature < this.max) {
+          this.temperature = this.temperature + randInteger(-1, 1);
+        } else if (this.temperature >= this.max) {
+          this.temperature -= 5;
+        } else if (this.temperature <= this.max) {
+          this.temperature += 5;
+        }
+      }
     }
   }
 }

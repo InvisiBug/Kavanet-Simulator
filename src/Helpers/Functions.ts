@@ -6,10 +6,14 @@ export const randBetween = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-export const randFutureTime = () => {
+export const randInteger = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+export const randFutureTime = (futureSecs = 7) => {
   let now: Date = new Date();
 
-  return now.setSeconds(now.getSeconds() + randBetween(0, 7));
+  return now.setSeconds(now.getSeconds() + randBetween(0, futureSecs));
 };
 
 export const shouldUpdate = (lastSent: number) => {
