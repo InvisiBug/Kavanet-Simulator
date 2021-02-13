@@ -14,11 +14,14 @@ export default class HeatingSensor {
   min: number = 12;
   max: number = 23;
 
-  constructor(client: MqttClient, nodeName: string, temperature: number) {
+  adjustment: boolean;
+
+  constructor(client: MqttClient, nodeName: string, temperature: number, adjustment: boolean = true) {
     this.temperature = temperature;
     this.client = client;
     this.nodeName = nodeName;
     this.timeToSend = randFutureTime();
+    this.adjustment = adjustment;
     publishOnConnect() ? this.publish() : null;
   }
 
@@ -42,7 +45,7 @@ export default class HeatingSensor {
 
       this.count += 1;
 
-      if (this.count === 4) {
+      if (this.adjustment && this.count === 1) {
         this.count = 0;
         if (this.temperature > this.min && this.temperature < this.max) {
           this.temperature = this.temperature + randInteger(-1, 1);

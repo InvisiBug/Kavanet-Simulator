@@ -37,8 +37,9 @@ import RadiatorValve from "./app/Devices/RadiatorValve";
 //      #  #### #    #       #
 //
 ////////////////////////////////////////////////////////////////////////
-console.clear();
-let client = mqtt.connect("mqtt://localhost");
+// console.clear();
+// let client = mqtt.connect("mqtt://localhost");
+let client = mqtt.connect("mqtt://mosquitto"); // Docker
 // let client = mqtt.connect("mqtt://kavanet.io");
 
 client.subscribe("#", (err) => {
@@ -46,7 +47,9 @@ client.subscribe("#", (err) => {
 });
 
 client.on("message", (_, payload) => {
+  // if (_ === "Radiator Fan" || _ === "Radiator Fan Control") {
   // console.log(chalk.white(_) + chalk.cyan(" \t" + payload));
+  // }
   console.log(chalk.yellow(payload.toString()));
 });
 
@@ -76,14 +79,13 @@ const tableLampDevice: TableLamp = new TableLamp(client);
 
 const computerAudioDevice: ComputerAudio = new ComputerAudio(client);
 
-const livingRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Living Room", 16);
-const kitchenHeatingSensor: HeatingSensor = new HeatingSensor(client, "Kitchen", 16);
-const liamsRoomheatingSensor: HeatingSensor = new HeatingSensor(client, "Liams Room", 16);
-const studyHeatingSensor: HeatingSensor = new HeatingSensor(client, "Study", 16);
-const ourRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Our Room", 16);
+const livingRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Living Room", 16, false);
+const kitchenHeatingSensor: HeatingSensor = new HeatingSensor(client, "Kitchen", 16, false);
+const liamsRoomheatingSensor: HeatingSensor = new HeatingSensor(client, "Liams Room", 16, false);
+const studyHeatingSensor: HeatingSensor = new HeatingSensor(client, "Study", 16, false);
+const ourRoomHeatingSensor: HeatingSensor = new HeatingSensor(client, "Our Room", 16, false);
 
 const livingRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Living Room");
-// const kitchenRadiatorValve: RadiatorValve = new RadiatorValve(client, "Kitchen");
 const liamsRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Liams Room");
 const studyRadiatorValve: RadiatorValve = new RadiatorValve(client, "Study");
 const ourRoomRadiatorValve: RadiatorValve = new RadiatorValve(client, "Our Room");
@@ -126,7 +128,6 @@ setInterval(() => {
 
   // Radiator Valves
   livingRoomRadiatorValve.tick();
-  // kitchenRadiatorValve.tick();
   liamsRoomRadiatorValve.tick();
   studyRadiatorValve.tick();
   ourRoomRadiatorValve.tick();
@@ -182,10 +183,6 @@ client.on("message", (topic, payload) => {
     case "Living Room Radiator Valve Control":
       livingRoomRadiatorValve.message(message);
       break;
-
-    // case "Kitchen Radiator Valve Control":
-    //   kitchenRadiatorValve.message(message);
-    //   break;
 
     case "Liams Room Radiator Valve Control":
       liamsRoomRadiatorValve.message(message);
