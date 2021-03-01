@@ -2,7 +2,7 @@
 FROM node:14
 
 # Create app directory within container
-WORKDIR /usr
+WORKDIR /usr/src/app
 
 # Install app dependencies
 # A wild card is used to ensure both package.json AND package-lock.json are copied 

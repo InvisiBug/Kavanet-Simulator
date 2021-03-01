@@ -1,3 +1,6 @@
+/*
+  Only the master on / off is simulated
+*/
 import { MqttClient } from "mqtt";
 import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
 
@@ -37,7 +40,7 @@ export default class ComputerAudio {
     this.client.publish(
       `${this.nodeName}`,
       JSON.stringify({
-        node: this.nodeName,
+        Node: this.nodeName,
         Left: this.left,
         Right: this.right,
         Sub: this.sub,

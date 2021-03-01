@@ -1,13 +1,13 @@
 version: "3.5"
 services:
-  kavanet-simulator:
-    container_name: kavanet-simulator
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: kavanet-simulator:latest
-    networks:
-      - proxynet
+  # kavanet-simulator:
+  #   container_name: kavanet-simulator
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: kavanet-simulator:latest
+  #   networks:
+  #     - proxynet
 
   mosquitto:
     image: eclipse-mosquitto:1.6
@@ -26,4 +26,4 @@ services:
        
 networks:
   proxynet:
-    name: kavanet
+    name: kavanet-network

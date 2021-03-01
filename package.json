@@ -1,7 +1,6 @@
 {
-  "name": "Simulator",
+  "name": "kavanet-simulator",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +8,8 @@
     "start": "ts-node ./src/index.ts",
     "mqtt-start": "docker-compose up -d",
     "mqtt-stop": "docker-compose down",
-    "build": "tsc"
+    "build": "tsc",
+    "logs": "docker logs kavanet-simulator -f"
   },
   "repository": {
     "type": "git",

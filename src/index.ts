@@ -38,8 +38,8 @@ import RadiatorValve from "./app/Devices/RadiatorValve";
 //
 ////////////////////////////////////////////////////////////////////////
 // console.clear();
-// let client = mqtt.connect("mqtt://localhost");
-let client = mqtt.connect("mqtt://mosquitto"); // Docker
+let client = mqtt.connect("mqtt://localhost");
+// let client = mqtt.connect("mqtt://mosquitto"); // Docker
 // let client = mqtt.connect("mqtt://kavanet.io");
 
 client.subscribe("#", (err) => {
@@ -166,6 +166,10 @@ client.on("message", (topic, payload) => {
 
     case "Computer Power Control":
       computerPowerDevice.message(message);
+      break;
+
+    case "Computer Audio Control":
+      computerAudioDevice.message(message);
       break;
 
     case "Desk LED Control":
