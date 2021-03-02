@@ -31,6 +31,12 @@ export default class ComputerAudio {
       this.sub = false;
       this.mixer = false;
     } else {
+      let data = JSON.parse(message);
+
+      this.left = data.left;
+      this.right = data.right;
+      this.sub = data.sub;
+      this.mixer = data.mixer;
       console.error("invalid message");
     }
     this.publish();
