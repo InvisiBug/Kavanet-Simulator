@@ -1,5 +1,5 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../helpers";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
 
 export default class ComputerPower {
   nodeName = "Computer Power";

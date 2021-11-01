@@ -9,7 +9,8 @@
     "mqtt-start": "docker-compose up -d",
     "mqtt-stop": "docker-compose down",
     "build": "tsc",
-    "logs": "docker logs kavanet-simulator -f"
+    "logs": "docker logs kavanet-simulator -f",
+    "start-container": "./bin/start-container.sh"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/InvisiBug/Kavanet-Simulator#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mqtt": "^4.2.4"
   },
