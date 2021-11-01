@@ -55,7 +55,7 @@ client.on("message", (_, payload) => {
   console.log(chalk.yellow(payload.toString()));
 });
 
-client.on("connect", () => console.log("Simulator connected to MQTT"));
+client.on("connect", () => console.log("Simulator connected to", process.env.MQTT ?? ""));
 
 ////////////////////////////////////////////////////////////////////////
 //
