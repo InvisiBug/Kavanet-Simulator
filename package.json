@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec \"ts-node \" ./src/index.ts",
-    "start": "ts-node ./src/index.ts",
-    "mqtt-start": "docker-compose up -d",
-    "mqtt-stop": "docker-compose down",
     "build": "tsc",
-    "logs": "docker logs kavanet-simulator -f"
+    "start-container": "./bin/start-container.sh",
+    "up": "clear && ./bin/start-container.sh",
+    "down": "docker-compose down",
+    "logs": "docker logs simulator -f"
   },
   "repository": {
     "type": "git",
@@ -24,6 +23,7 @@
   "homepage": "https://github.com/InvisiBug/Kavanet-Simulator#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mqtt": "^4.2.4"
   },

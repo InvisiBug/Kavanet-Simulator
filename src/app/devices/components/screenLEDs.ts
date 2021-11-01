@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../../helpers";
+import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../helpers";
 
 export default class ScreenLEDs {
   nodeName = "Screen LEDs";

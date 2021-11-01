@@ -5,16 +5,19 @@ FROM node:14
 WORKDIR /usr/src/app
 
 # Install app dependencies
-# A wild card is used to ensure both package.json AND package-lock.json are copied 
+# A wild card is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
 COPY tsconfig.json ./
 
 # Copy across source folder
-COPY ./src ./src
+COPY ./dist ./
 
-RUN npm install -g nodemon
+# Prevents unnecessary packages from being installed
+ENV NODE_ENV production
+
 RUN npm install
 
 EXPOSE 1883
 EXPOSE 9001
-CMD ["npm", "start"]
+
+CMD ["node","index.js"]

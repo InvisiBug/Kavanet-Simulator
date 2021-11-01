@@ -1,5 +1,6 @@
 import mqtt from "mqtt";
 import chalk from "chalk";
+require("dotenv").config();
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -25,16 +26,6 @@ import {
   computerPower,
   radiatorValve,
 } from "./app/devices";
-// import Plug from "./app/devices/Plug";
-// import ComputerAudio from "./app/devices/ComputerAudio";
-// import HeatingSensor from "./app/devices/HeatingSensor";
-// import Heating from "./app/devices/Heating";
-// import DeskLEDs from "./app/devices/DeskLEDs";
-// import ScreenLEDs from "./app/devices/ScreenLEDs";
-// import TableLamp from "./app/devices/TableLamp";
-// import RadiatorFan from "./app/devices/RadiatorFan";
-// import ComputerPower from "./app/devices/ComputerPower";
-// import RadiatorValve from "./app/devices/components/radiatorValve";
 
 // TODO Look at d.ts file (a decleration meaning you dont need to import types)
 
@@ -50,9 +41,11 @@ import {
 //
 ////////////////////////////////////////////////////////////////////////
 // console.clear();
-let client = mqtt.connect("mqtt://localhost");
+// let client = mqtt.connect("mqtt://localhost");
 // let client = mqtt.connect("mqtt://mosquitto"); // Docker
 // let client = mqtt.connect("mqtt://kavanet.io");
+
+let client = mqtt.connect(process.env.MQTT ?? "");
 
 client.subscribe("#", (err) => {
   err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
@@ -62,7 +55,7 @@ client.on("message", (_, payload) => {
   console.log(chalk.yellow(payload.toString()));
 });
 
-client.on("connect", () => console.log("Simulator connected to MQTT"));
+client.on("connect", () => console.log("Simulator connected to", process.env.MQTT ?? ""));
 
 ////////////////////////////////////////////////////////////////////////
 //

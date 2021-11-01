@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect } from "../../../helpers";
+import { randFutureTime, shouldUpdate, publishOnConnect } from "../../helpers";
 
 export default class Sun {
   nodeName: string = "Sun";
