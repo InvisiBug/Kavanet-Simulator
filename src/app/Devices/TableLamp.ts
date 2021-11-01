@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../Helpers/Functions";
+import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../helpers";
 
 export default class TableLamp {
   nodeName = "Table Lamp";
@@ -15,11 +15,15 @@ export default class TableLamp {
     publishOnConnect() ? this.publish() : null;
   }
 
-  message(message: string) {
-    this.red = JSON.parse(message).red;
-    this.green = JSON.parse(message).green;
-    this.blue = JSON.parse(message).blue;
-    this.publish();
+  handleIncoming(topic: String, rawPayload: Object) {
+    if (topic === "Table Lamp Control") {
+      const payload = JSON.parse(rawPayload.toString());
+
+      this.red = JSON.parse(payload).red;
+      this.green = JSON.parse(payload).green;
+      this.blue = JSON.parse(payload).blue;
+      this.publish();
+    }
   }
 
   publish() {

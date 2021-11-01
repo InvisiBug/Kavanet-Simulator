@@ -2,7 +2,7 @@
   Only the master on / off is simulated
 */
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
 
 export default class ComputerAudio {
   nodeName = "Computer Audio";
@@ -14,35 +14,40 @@ export default class ComputerAudio {
   client: MqttClient;
 
   constructor(client: MqttClient) {
-    this.client = client; // Explicit from MqttClient
+    this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
 
-  message(message: string) {
-    if (message === "1") {
-      this.left = true;
-      this.right = true;
-      this.sub = true;
-      this.mixer = true;
-    } else if (message === "0") {
-      this.left = false;
-      this.right = false;
-      this.sub = false;
-      this.mixer = false;
-    } else {
-      let data = JSON.parse(message);
+  handleIncoming(topic: String, rawPayload: Object) {
+    if (topic === "Sun Control") {
+      const payload = JSON.parse(rawPayload.toString());
 
-      this.left = data.left;
-      this.right = data.right;
-      this.sub = data.sub;
-      this.mixer = data.mixer;
-      console.error("invalid message");
+      if (payload === 1) {
+        this.left = true;
+        this.right = true;
+        this.sub = true;
+        this.mixer = true;
+      } else if (payload === 0) {
+        this.left = false;
+        this.right = false;
+        this.sub = false;
+        this.mixer = false;
+      } else {
+        let data = JSON.parse(payload);
+        // The actual device still uses captials
+        this.left = data.Left;
+        this.right = data.Right;
+        this.sub = data.Sub;
+        this.mixer = data.Mixer;
+        // console.error("invalid message");
+      }
+      this.publish();
     }
-    this.publish();
   }
 
   publish() {
+    // The actual device still uses captials
     this.client.publish(
       `${this.nodeName}`,
       JSON.stringify({

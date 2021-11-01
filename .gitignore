@@ -6,6 +6,7 @@
 /src/Databases
 /.pnp
 .pnp.js
+/dist
 
 # testing
 /coverage

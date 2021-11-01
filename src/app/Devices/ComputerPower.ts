@@ -1,5 +1,5 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../Helpers/Functions";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
 
 export default class ComputerPower {
   nodeName = "Computer Power";
@@ -13,15 +13,19 @@ export default class ComputerPower {
     publishOnConnect() ? this.publish() : null;
   }
 
-  message(message: string) {
-    if (message === "1") {
-      this.state = true;
-    } else if (message === "0") {
-      this.state = false;
-    } else {
-      console.error("invalid message");
+  handleIncoming(topic: String, rawPayload: Object) {
+    if (topic === "Sun Control") {
+      const payload = JSON.parse(rawPayload.toString());
+
+      if (payload === 1) {
+        this.state = true;
+      } else if (payload === 0) {
+        this.state = false;
+      } else {
+        console.error("invalid message");
+      }
+      this.publish();
     }
-    this.publish();
   }
 
   publish() {

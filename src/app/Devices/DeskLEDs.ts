@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect, randBetween } from "../../Helpers/Functions";
+import { randFutureTime, shouldUpdate, publishOnConnect, randBetween } from "../../helpers";
 export default class DeskLEDs {
   nodeName = "Desk LEDs";
   red: number = randBetween(0, 255);
@@ -14,11 +14,15 @@ export default class DeskLEDs {
     publishOnConnect() ? this.publish() : null;
   }
 
-  message(message: string) {
-    this.red = JSON.parse(message).red;
-    this.green = JSON.parse(message).green;
-    this.blue = JSON.parse(message).blue;
-    this.publish();
+  handleIncoming(topic: String, rawPayload: Object) {
+    if (topic === "Sun Control") {
+      const payload = JSON.parse(rawPayload.toString());
+
+      this.red = JSON.parse(payload).red;
+      this.green = JSON.parse(payload).green;
+      this.blue = JSON.parse(payload).blue;
+      this.publish();
+    }
   }
 
   publish() {

@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect, randInteger } from "../../Helpers/Functions";
+import { randFutureTime, shouldUpdate, publishOnConnect, randInteger } from "../../helpers";
 export default class HeatingSensor {
   nodeName: string;
   temperature: number;
@@ -32,10 +32,11 @@ export default class HeatingSensor {
         node: `${this.nodeName} Heating Sensor`,
         temperature: this.temperature,
         humidity: this.humidity,
-        pressure: this.pressure,
+        // pressure: this.pressure,
       }),
     );
   }
+  handleIncoming(topic: string, payload: object) {}
 
   tick() {
     let now = new Date().getTime();
