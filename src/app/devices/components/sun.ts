@@ -1,11 +1,9 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../helpers";
+import { randFutureTime, shouldUpdate, publishOnConnect } from "../../../helpers";
 
-export default class TableLamp {
-  nodeName = "Table Lamp";
-  red: number = randBetween(0, 255);
-  green: number = randBetween(0, 255);
-  blue: number = randBetween(0, 255);
+export default class Sun {
+  nodeName: string = "Sun";
+  state: boolean = true;
   lastSent: number;
   client: MqttClient;
 
@@ -16,12 +14,16 @@ export default class TableLamp {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === "Table Lamp Control") {
+    if (topic === "Sun Control") {
       const payload = JSON.parse(rawPayload.toString());
 
-      this.red = JSON.parse(payload).red;
-      this.green = JSON.parse(payload).green;
-      this.blue = JSON.parse(payload).blue;
+      if (payload === 1) {
+        this.state = true;
+      } else if (payload === 0) {
+        this.state = false;
+      } else {
+        console.error("invalid message");
+      }
       this.publish();
     }
   }
@@ -31,9 +33,7 @@ export default class TableLamp {
       `${this.nodeName}`,
       JSON.stringify({
         node: this.nodeName,
-        red: this.red,
-        green: this.green,
-        blue: this.blue,
+        state: this.state,
       }),
     );
   }

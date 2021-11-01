@@ -1,15 +1,15 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect, randBetween } from "../../helpers";
-export default class DeskLEDs {
-  nodeName = "Desk LEDs";
-  red: number = randBetween(0, 255);
-  green: number = randBetween(0, 255);
-  blue: number = randBetween(0, 255);
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../helpers";
+
+export default class RadiatorValve {
+  nodeName: string;
+  state: boolean = true;
   lastSent: number;
   client: MqttClient;
 
-  constructor(client: MqttClient) {
+  constructor(client: MqttClient, nodeName: string) {
     this.client = client;
+    this.nodeName = nodeName;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
@@ -18,21 +18,23 @@ export default class DeskLEDs {
     if (topic === "Sun Control") {
       const payload = JSON.parse(rawPayload.toString());
 
-      this.red = JSON.parse(payload).red;
-      this.green = JSON.parse(payload).green;
-      this.blue = JSON.parse(payload).blue;
+      if (payload === 1) {
+        this.state = true;
+      } else if (payload === 0) {
+        this.state = false;
+      } else {
+        console.error("invalid message");
+      }
       this.publish();
     }
   }
 
   publish() {
     this.client.publish(
-      `${this.nodeName}`,
+      `${this.nodeName} Radiator Valve`,
       JSON.stringify({
-        node: this.nodeName,
-        red: this.red,
-        green: this.green,
-        blue: this.blue,
+        node: `${this.nodeName} Radiator Valve`,
+        state: this.state,
       }),
     );
   }

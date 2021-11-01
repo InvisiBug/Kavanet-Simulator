@@ -1,23 +1,22 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../helpers";
 
-export default class RadiatorValve {
-  nodeName: string;
+export default class Plug {
+  nodeName: string = "Plug";
   state: boolean = true;
   lastSent: number;
   client: MqttClient;
 
-  constructor(client: MqttClient, nodeName: string) {
+  constructor(client: MqttClient) {
     this.client = client;
-    this.nodeName = nodeName;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === "Sun Control") {
-      const payload = JSON.parse(rawPayload.toString());
+    const payload = JSON.parse(rawPayload.toString());
 
+    if (topic === "Sun Control") {
       if (payload === 1) {
         this.state = true;
       } else if (payload === 0) {
@@ -31,9 +30,9 @@ export default class RadiatorValve {
 
   publish() {
     this.client.publish(
-      `${this.nodeName} Radiator Valve`,
+      `${this.nodeName}`,
       JSON.stringify({
-        node: `${this.nodeName} Radiator Valve`,
+        node: this.nodeName,
         state: this.state,
       }),
     );

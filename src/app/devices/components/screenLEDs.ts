@@ -1,11 +1,14 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
+import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../../helpers";
 
-export default class Plug {
-  nodeName: string = "Plug";
-  state: boolean = true;
+export default class ScreenLEDs {
+  nodeName = "Screen LEDs";
+  red: number = randBetween(0, 255);
+  green: number = randBetween(0, 255);
+  blue: number = randBetween(0, 255);
+  mode: number = 0;
   lastSent: number;
-  client: MqttClient;
+  client;
 
   constructor(client: MqttClient) {
     this.client = client;
@@ -14,15 +17,17 @@ export default class Plug {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    const payload = JSON.parse(rawPayload.toString());
-
     if (topic === "Sun Control") {
+      const payload = JSON.parse(rawPayload.toString());
+
       if (payload === 1) {
-        this.state = true;
+        this.mode = 1;
       } else if (payload === 0) {
-        this.state = false;
+        this.mode = 0;
       } else {
-        console.error("invalid message");
+        this.red = JSON.parse(payload).red;
+        this.green = JSON.parse(payload).green;
+        this.blue = JSON.parse(payload).blue;
       }
       this.publish();
     }
@@ -33,7 +38,10 @@ export default class Plug {
       `${this.nodeName}`,
       JSON.stringify({
         node: this.nodeName,
-        state: this.state,
+        red: this.red,
+        green: this.green,
+        blue: this.blue,
+        mode: this.mode,
       }),
     );
   }

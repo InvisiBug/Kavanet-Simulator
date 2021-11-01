@@ -2,7 +2,7 @@
   Only the master on / off is simulated
 */
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../helpers";
 
 export default class ComputerAudio {
   nodeName = "Computer Audio";

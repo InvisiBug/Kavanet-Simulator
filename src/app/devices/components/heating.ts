@@ -1,9 +1,9 @@
-import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect } from "../../helpers";
+import mqtt, { MqttClient } from "mqtt";
+import { randFutureTime, shouldUpdate, publishOnConnect } from "../../../helpers";
 
-export default class Sun {
-  nodeName: string = "Sun";
-  state: boolean = true;
+export default class Heating {
+  nodeName: string = "Heating";
+  state: boolean = false;
   lastSent: number;
   client: MqttClient;
 
@@ -14,7 +14,7 @@ export default class Sun {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === "Sun Control") {
+    if (topic === "Radiator Fan Control") {
       const payload = JSON.parse(rawPayload.toString());
 
       if (payload === 1) {
@@ -22,7 +22,7 @@ export default class Sun {
       } else if (payload === 0) {
         this.state = false;
       } else {
-        console.error("invalid message");
+        console.error("Heating: Invalid Message");
       }
       this.publish();
     }

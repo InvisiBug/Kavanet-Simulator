@@ -1,0 +1,11 @@
+export { default as computerAudio } from "./components/computerAudio";
+export { default as computerPower } from "./components/computerPower";
+export { default as deskLEDs } from "./components/deskLEDs";
+export { default as heating } from "./components/heating";
+export { default as heatingSensor } from "./components/heatingSensor";
+export { default as plug } from "./components/plug";
+export { default as radiatorFan } from "./components/radiatorFan";
+export { default as radiatorValve } from "./components/radiatorValve";
+export { default as screenLEDs } from "./components/screenLEDs";
+export { default as sun } from "./components/sun";
+export { default as tableLamp } from "./components/tableLamp";

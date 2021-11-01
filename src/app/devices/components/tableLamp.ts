@@ -1,28 +1,27 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect } from "../../helpers";
-export default class RadiatorFan {
-  nodeName: string = "Radiator Fan";
-  state: boolean = false;
+import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../../helpers";
+
+export default class TableLamp {
+  nodeName = "Table Lamp";
+  red: number = randBetween(0, 255);
+  green: number = randBetween(0, 255);
+  blue: number = randBetween(0, 255);
   lastSent: number;
   client: MqttClient;
 
   constructor(client: MqttClient) {
-    this.client = client; // Explicit from MqttClient
+    this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === "Radiator Fan Control") {
+    if (topic === "Table Lamp Control") {
       const payload = JSON.parse(rawPayload.toString());
 
-      if (payload === 1) {
-        this.state = true;
-      } else if (payload === 0) {
-        this.state = false;
-      } else {
-        console.error("Radiator Fan: Invalid Message");
-      }
+      this.red = JSON.parse(payload).red;
+      this.green = JSON.parse(payload).green;
+      this.blue = JSON.parse(payload).blue;
       this.publish();
     }
   }
@@ -32,7 +31,9 @@ export default class RadiatorFan {
       `${this.nodeName}`,
       JSON.stringify({
         node: this.nodeName,
-        state: this.state,
+        red: this.red,
+        green: this.green,
+        blue: this.blue,
       }),
     );
   }
