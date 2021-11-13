@@ -27,8 +27,6 @@ import {
   radiatorValve,
 } from "./app/devices";
 
-// TODO Look at d.ts file (a decleration meaning you dont need to import types)
-
 ////////////////////////////////////////////////////////////////////////
 //
 // #     #  #####  ####### #######
@@ -40,11 +38,6 @@ import {
 // #     #  #### #    #       #
 //
 ////////////////////////////////////////////////////////////////////////
-// console.clear();
-// let client = mqtt.connect("mqtt://localhost");
-// let client = mqtt.connect("mqtt://mosquitto"); // Docker
-// let client = mqtt.connect("mqtt://kavanet.io");
-
 let client = mqtt.connect(process.env.MQTT ?? "");
 
 client.subscribe("#", (err) => {
@@ -126,7 +119,7 @@ setInterval(() => {
 //   #####   ####  #    #   #   #    #  ####  ######  ####
 //
 ////////////////////////////////////////////////////////////////////////
-client.on("message", (topic, payload) => {
+client.on("message", (topic: string, payload) => {
   try {
     for (let i = 0; i < devices.length; i++) {
       devices[i].handleIncoming(topic, payload);

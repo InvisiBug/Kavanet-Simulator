@@ -14,9 +14,9 @@ export default class Plug {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    const payload = JSON.parse(rawPayload.toString());
+    if (topic === "Plug Control") {
+      const payload = JSON.parse(rawPayload.toString());
 
-    if (topic === "Sun Control") {
       if (payload === 1) {
         this.state = true;
       } else if (payload === 0) {

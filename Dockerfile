@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 # A wild card is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
-COPY tsconfig.json ./
+# COPY tsconfig.json ./
 
 # Copy across source folder
 COPY ./dist ./

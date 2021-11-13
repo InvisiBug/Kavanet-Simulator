@@ -2,15 +2,31 @@ version: "3.1"
 
 services:
   simulator:
-    container_name: simulator
+    container_name: kavanest-simulator
+    image: kavanest-simulator
     build:
       context: .
       dockerfile: Dockerfile
-    # image: simulator
     networks:
       - proxynet
     environment:
       - MQTT=mqtt://mosquitto
+
+  mosquitto:
+    image: eclipse-mosquitto:1.6
+    container_name: kavanest-sim-mqtt
+    expose:
+      - 1883
+      - 9001
+    ports:
+      - 1883:1883
+      - 9001:9001
+    networks:
+      - proxynet
+
+networks:
+  proxynet:
+    name: kavanest-devnet
 
 networks:
   proxynet:
