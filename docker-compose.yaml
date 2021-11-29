@@ -27,7 +27,3 @@ services:
 networks:
   proxynet:
     name: kavanest-devnet
-
-networks:
-  proxynet:
-    name: kavanest-devnet

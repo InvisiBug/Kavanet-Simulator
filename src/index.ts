@@ -1,5 +1,8 @@
 import mqtt from "mqtt";
 import chalk from "chalk";
+import { load } from "js-yaml";
+import { readFileSync } from "fs";
+import path from "path";
 require("dotenv").config();
 
 ////////////////////////////////////////////////////////////////////////
@@ -25,7 +28,7 @@ import {
   radiatorFan,
   computerPower,
   radiatorValve,
-} from "./app/devices";
+} from "./components/devices";
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -61,6 +64,15 @@ client.on("connect", () => console.log("Simulator connected to", process.env.MQT
 // ######  ######   ##   #  ####  ######    ### #    # #   #   # #    # ###### #  ####  #    #   #   #  ####  #    #
 //
 ////////////////////////////////////////////////////////////////////////
+
+//* Config'd devices
+const deviceConfig: any = load(readFileSync(path.resolve(__dirname, "./devices.yaml"), "utf-8"));
+
+deviceConfig.forEach((node: any) => {
+  // console.log(node);
+  // devices.push(DeviceCreator(client, node));
+});
+
 let devices: Array<any> = [];
 
 devices.push(new sun(client));
