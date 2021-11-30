@@ -1,23 +1,32 @@
 import { MqttClient } from "mqtt";
 import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../helpers";
 
-export default class ScreenLEDs {
-  nodeName = "Screen LEDs";
+export default class RBGLight {
+  client: MqttClient;
+  name: string;
+  topic: string;
+  controlTopic: string;
+  multiMode: boolean;
+
   red: number = randBetween(0, 255);
   green: number = randBetween(0, 255);
   blue: number = randBetween(0, 255);
   mode: number = 0;
   lastSent: number;
-  client;
 
-  constructor(client: MqttClient) {
+  constructor(client: MqttClient, deviceConfig: any) {
+    this.name = deviceConfig.name;
+    this.topic = deviceConfig.topic;
+    this.controlTopic = deviceConfig.controlTopic;
+    this.multiMode = deviceConfig.multiMode;
+
     this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === "Sun Control") {
+    if (topic === this.topic) {
       const payload = JSON.parse(rawPayload.toString());
 
       if (payload === 1) {
@@ -35,13 +44,13 @@ export default class ScreenLEDs {
 
   publish() {
     this.client.publish(
-      `${this.nodeName}`,
+      this.name,
       JSON.stringify({
-        node: this.nodeName,
+        node: this.name,
         red: this.red,
         green: this.green,
         blue: this.blue,
-        mode: this.mode,
+        ...(this.multiMode && { mode: this.mode }),
       }),
     );
   }

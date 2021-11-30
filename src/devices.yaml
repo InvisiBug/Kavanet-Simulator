@@ -1,0 +1,88 @@
+# heatingSensors:
+#   - name: livingRoom
+#     topic: Living Room Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: kitchen
+#     topic: Kitchen Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: liamsRoom
+#     topic: Liams Room Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: study
+#     topic: Study Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: ourRoom
+#     topic: Our Room Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+heatingSensorBridges:
+  - name: outside
+    topic: Our Room Heating Sensor
+
+
+# plugs:
+#   - name: sun
+#     controlTopic: Sun Control
+#     topic: Sun
+
+#   - name: floodlight
+#     controlTopic: Plug Control
+#     topic: Plug
+
+#   - name: radiatorFan
+#     controlTopic: Radiator Fan Control
+#     topic: Radiator Fan
+
+#   - name: heating
+#     controlTopic: Heating Control
+#     topic: Heating
+
+#   - name: computerPower
+#     controlTopic: Computer Power Control
+#     topic: Computer Power
+
+
+# valves:
+#   - name: livingRoom
+#     topic: Living Room Radiator Valve
+
+#   - name: kitchen
+#     topic: Kitchen Radiator Valve
+
+#   - name: liamsRoom
+#     topic: Liams Room Radiator Valve
+
+#   - name: study
+#     topic: Study Radiator Valve
+
+#   - name: ourRoom
+#     topic: Our Room Radiator Valve
+
+
+# rgbLights:
+# - name: deskLEDs
+#   topic: Desk LEDs
+#   multiMode: false
+
+# - name: tableLamp
+#   topic: Table Lamp
+#   multiMode: true
+
+# - name: screenLEDs
+#   topic: Screen LEDs
+#   multiMode: true
+
+
+# specials:
+#   - name: computerAudio
+#     topic: computerAudio
+
