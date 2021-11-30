@@ -1,32 +1,22 @@
 import { MqttClient } from "mqtt";
-import {
-  computerPower,
-  computerAudio,
-  deskLEDs,
-  heating,
-  heatingSensor,
-  plug,
-  radiatorFan,
-  radiatorValve,
-  screenLEDs,
-  sun,
-  tableLamp,
-} from "./devices/index";
+import ComputerAudio from "./devices/components/computerAudio";
+import { computerAudio, Plugs, Valves, HeatingSensors, RBGLights } from "./devices/index";
 
-export default (client: MqttClient, deviceConfig: any) => {
-  switch (deviceConfig.type) {
-    case "plug":
-    // return new plug(client, deviceConfig);
+export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
+  switch (deviceType) {
+    case "plugs":
+      return new Plugs(client, deviceConfig);
 
-    case "heatingSensor":
-    // return new heatingSensor(client, deviceConfig);
+    case "valves":
+      return new Valves(client, deviceConfig);
 
-    case "valve":
-    // return new valve(client, deviceConfig);
+    case "heatingSensors":
+      return new HeatingSensors(client, deviceConfig);
 
-    case "rgbLight":
-      // return new rgbLight(client, deviceConfig);
-      break;
+    case "rgbLights":
+      return new RBGLights(client, deviceConfig);
+
+    case "specials":
+      if (deviceConfig.name === "computerAudio") return new ComputerAudio(client);
   }
-  console.log(deviceConfig.type);
 };

@@ -20,7 +20,7 @@ export default class ComputerAudio {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === "Sun Control") {
+    if (topic === "Computer Audio Control") {
       const payload = JSON.parse(rawPayload.toString());
 
       if (payload === 1) {
