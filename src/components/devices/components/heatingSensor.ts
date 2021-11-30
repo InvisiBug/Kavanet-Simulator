@@ -1,41 +1,43 @@
 import { MqttClient } from "mqtt";
 import { randFutureTime, shouldUpdate, publishOnConnect, randInteger } from "../../helpers";
 export default class HeatingSensor {
-  nodeName: string;
+  name: string;
   temperature: number;
   humidity: number = 10;
-  pressure: number = 101459.2;
+  topic: string;
 
   timeToSend: number;
-  client: MqttClient; // Dont need to add type info here as its explicitly declared in the constructor
+  client: MqttClient;
 
-  count: number = 0;
+  adjustmentInterval: number = 0;
 
   min: number = 12;
   max: number = 23;
 
-  adjustment: boolean;
+  fluctuation: boolean;
 
-  constructor(client: MqttClient, nodeName: string, temperature: number, adjustment: boolean = true) {
-    this.temperature = temperature;
+  constructor(client: MqttClient, deviceConfig: any) {
+    this.name = deviceConfig.name;
     this.client = client;
-    this.nodeName = nodeName;
+    this.topic = deviceConfig.topic;
+
+    this.temperature = deviceConfig.startingTemp;
     this.timeToSend = randFutureTime();
-    this.adjustment = adjustment;
+    this.fluctuation = deviceConfig.fluctuation;
     publishOnConnect() ? this.publish() : null;
   }
 
   publish() {
     this.client.publish(
-      `${this.nodeName} Heating Sensor`,
+      this.topic,
       JSON.stringify({
-        node: `${this.nodeName} Heating Sensor`,
+        node: `${this.name} Heating Sensor`,
         temperature: this.temperature,
         humidity: this.humidity,
-        // pressure: this.pressure,
       }),
     );
   }
+
   handleIncoming(topic: string, payload: object) {}
 
   tick() {
@@ -44,10 +46,10 @@ export default class HeatingSensor {
       this.timeToSend = now;
       this.publish();
 
-      this.count += 1;
+      this.adjustmentInterval += 1;
 
-      if (this.adjustment && this.count === 1) {
-        this.count = 0;
+      if (this.fluctuation && this.adjustmentInterval === 5) {
+        this.adjustmentInterval = 0;
         if (this.temperature > this.min && this.temperature < this.max) {
           this.temperature = this.temperature + randInteger(-1, 1);
         } else if (this.temperature >= this.max) {

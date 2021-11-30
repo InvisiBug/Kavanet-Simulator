@@ -1,19 +1,27 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect } from "../../helpers";
-export default class RadiatorFan {
-  nodeName: string = "Radiator Fan";
-  state: boolean = false;
-  lastSent: number;
-  client: MqttClient;
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
 
-  constructor(client: MqttClient) {
-    this.client = client; // Explicit from MqttClient
+export default class Plug {
+  client: MqttClient;
+  name: string;
+  topic: string;
+  controlTopic: string;
+
+  state: boolean = true;
+  lastSent: number;
+
+  constructor(client: MqttClient, deviceConfig: any) {
+    this.name = deviceConfig.name;
+    this.topic = deviceConfig.topic;
+    this.controlTopic = deviceConfig.controlTopic;
+
+    this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === "Radiator Fan Control") {
+    if (topic === this.controlTopic) {
       const payload = JSON.parse(rawPayload.toString());
 
       if (payload === 1) {
@@ -21,7 +29,7 @@ export default class RadiatorFan {
       } else if (payload === 0) {
         this.state = false;
       } else {
-        console.error("Radiator Fan: Invalid Message");
+        console.error("invalid message");
       }
       this.publish();
     }
@@ -29,9 +37,9 @@ export default class RadiatorFan {
 
   publish() {
     this.client.publish(
-      `${this.nodeName}`,
+      this.topic,
       JSON.stringify({
-        node: this.nodeName,
+        node: this.name,
         state: this.state,
       }),
     );

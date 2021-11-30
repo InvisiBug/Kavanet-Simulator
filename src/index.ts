@@ -1,33 +1,10 @@
-import mqtt from "mqtt";
-import chalk from "chalk";
+import DeviceCreator from "./components/deviceCreator";
+import { readFileSync } from "fs";
+import { load } from "js-yaml";
 require("dotenv").config();
-
-////////////////////////////////////////////////////////////////////////
-//
-// ######                                   ###
-// #     # ###### #    # #  ####  ######     #  #    # #####   ####  #####  #####  ####
-// #     # #      #    # # #    # #          #  ##  ## #    # #    # #    #   #   #
-// #     # #####  #    # # #      #####      #  # ## # #    # #    # #    #   #    ####
-// #     # #      #    # # #      #          #  #    # #####  #    # #####    #        #
-// #     # #       #  #  # #    # #          #  #    # #      #    # #   #    #   #    #
-// ######  ######   ##   #  ####  ######    ### #    # #       ####  #    #   #    ####
-//
-////////////////////////////////////////////////////////////////////////
-import {
-  plug,
-  sun,
-  computerAudio,
-  heatingSensor,
-  heating,
-  deskLEDs,
-  screenLEDs,
-  tableLamp,
-  radiatorFan,
-  computerPower,
-  radiatorValve,
-} from "./app/devices";
-
-// TODO Look at d.ts file (a decleration meaning you dont need to import types)
+import chalk from "chalk";
+import mqtt from "mqtt";
+import path from "path";
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -40,11 +17,6 @@ import {
 // #     #  #### #    #       #
 //
 ////////////////////////////////////////////////////////////////////////
-// console.clear();
-// let client = mqtt.connect("mqtt://localhost");
-// let client = mqtt.connect("mqtt://mosquitto"); // Docker
-// let client = mqtt.connect("mqtt://kavanet.io");
-
 let client = mqtt.connect(process.env.MQTT ?? "");
 
 client.subscribe("#", (err) => {
@@ -70,28 +42,16 @@ client.on("connect", () => console.log("Simulator connected to", process.env.MQT
 ////////////////////////////////////////////////////////////////////////
 let devices: Array<any> = [];
 
-devices.push(new sun(client));
-devices.push(new plug(client));
-devices.push(new radiatorFan(client));
-devices.push(new heating(client));
-devices.push(new computerPower(client));
+//* Config'd devices
+const deviceConfig: any = load(readFileSync(path.resolve(__dirname, "./devices.yaml"), "utf-8"));
 
-devices.push(new deskLEDs(client));
-devices.push(new screenLEDs(client));
-devices.push(new tableLamp(client));
+for (let deviceType in deviceConfig) {
+  deviceConfig[deviceType].forEach((node: any) => {
+    devices.push(DeviceCreator(client, node, deviceType));
+  });
+}
 
-devices.push(new computerAudio(client));
-
-devices.push(new heatingSensor(client, "Living Room", 16, false));
-devices.push(new heatingSensor(client, "Kitchen", 16, false));
-devices.push(new heatingSensor(client, "Liams Room", 16, false));
-devices.push(new heatingSensor(client, "Study", 16, false));
-devices.push(new heatingSensor(client, "Our Room", 16, false));
-
-devices.push(new radiatorValve(client, "Living Room"));
-devices.push(new radiatorValve(client, "Liams Room"));
-devices.push(new radiatorValve(client, "Study"));
-devices.push(new radiatorValve(client, "Our Room"));
+console.log();
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -104,7 +64,6 @@ devices.push(new radiatorValve(client, "Our Room"));
 //  #####  #      #####  #    #   #   ######  ####
 //
 ////////////////////////////////////////////////////////////////////////
-// Device Updates
 setInterval(() => {
   try {
     for (let i = 0; i < devices.length; i++) {
@@ -126,7 +85,7 @@ setInterval(() => {
 //   #####   ####  #    #   #   #    #  ####  ######  ####
 //
 ////////////////////////////////////////////////////////////////////////
-client.on("message", (topic, payload) => {
+client.on("message", (topic: string, payload) => {
   try {
     for (let i = 0; i < devices.length; i++) {
       devices[i].handleIncoming(topic, payload);
