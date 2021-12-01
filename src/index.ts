@@ -6,7 +6,19 @@ import chalk from "chalk";
 import mqtt from "mqtt";
 import path from "path";
 
-let client = mqtt.connect(process.env.MQTT ?? "");
+const runningInCluster: boolean = process.env.CLUSTER == "cluster" ? true : false;
+// Kuberneted didnt like this value being boolean so its now "cluster"
+
+// Connect to a different internal network if we're running on a cluster
+let client: mqtt.MqttClient;
+if (runningInCluster) {
+  client = mqtt.connect(process.env.MQTT_CLUSTER ?? "");
+} else {
+  client = mqtt.connect(process.env.MQTT_LOCAL ?? ""); // Development
+  console.log("Running on a laptop 💻");
+}
+
+// let client = mqtt.connect(process.env.MQTT ?? "");
 
 client.subscribe("#", (err) => {
   err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));

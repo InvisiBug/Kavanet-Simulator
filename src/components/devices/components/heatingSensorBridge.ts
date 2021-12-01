@@ -1,5 +1,5 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect, randInteger } from "../../helpers";
+import { randFutureTime, shouldUpdate, publishOnConnect } from "../../helpers";
 export default class HeatingSensor {
   name: string;
   temperature: number = 0;

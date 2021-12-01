@@ -9,6 +9,18 @@ deployment:
     - port: 1883
     - port: 9001
 
+  - name: kavanest-simulator
+    image: 192.168.1.61:5000/kavanest-simulator
+    ports:
+    - port: 1883
+    - port: 9001
+    env:
+      - name: CLUSTER
+        value: cluster
+      - name: MQTT_LOCAL
+        value: mqtt://localhost
+      - name: MQTT_CLUSTER
+        value: mqtt://mosquitto
 
 
 service:
@@ -19,3 +31,8 @@ service:
         - port: 1883
         - port: 9001
 
+    - name: kavanest-simulator
+      selector: kavanest-simulator
+      ports:
+        - port: 1883
+        - port: 9001

@@ -40,6 +40,7 @@ heatingSensorBridges:
   - name: ourRoom
     topic: Our Room Heating Sensor
 
+<<<<<<< HEAD
 
 # plugs:
 #   - name: sun
@@ -49,6 +50,12 @@ heatingSensorBridges:
 #   - name: floodlight
 #     controlTopic: Plug Control
 #     topic: Plug
+=======
+plugs:
+  - name: sun
+    controlTopic: Sun Control
+    topic: Sun
+>>>>>>> Evironment dependent mqtt
 
 #   - name: radiatorFan
 #     controlTopic: Radiator Fan Control
