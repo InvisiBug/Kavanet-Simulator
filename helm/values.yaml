@@ -1,0 +1,21 @@
+name: kavanest-simulator
+
+namespace: kavanest
+
+deployment:
+  - name: mosquitto
+    image: eclipse-mosquitto:1.6
+    ports:
+    - port: 1883
+    - port: 9001
+
+
+
+service:
+  clusterIP:
+    - name: mosquitto
+      selector: mosquitto
+      ports:
+        - port: 1883
+        - port: 9001
+

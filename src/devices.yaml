@@ -25,7 +25,19 @@
 #     fluctuation: true
 
 heatingSensorBridges:
-  - name: outside
+  - name: livingRoom
+    topic: Living Room Heating Sensor
+
+  - name: kitchen
+    topic: Kitchen Heating Sensor
+
+  - name: liamsRoom
+    topic: Liams Room Heating Sensor
+
+  - name: study
+    topic: Study Heating Sensor
+
+  - name: ourRoom
     topic: Our Room Heating Sensor
 
 
