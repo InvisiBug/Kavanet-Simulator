@@ -25,14 +25,8 @@ deployment:
 
 service:
   clusterIP:
-    - name: mosquitto
-      selector: mosquitto
-      ports:
-        - port: 1883
-        - port: 9001
-
     - name: kavanest-simulator
-      selector: kavanest-simulator
+      selector: mosquitto
       ports:
         - port: 1883
         - port: 9001
