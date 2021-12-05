@@ -11,8 +11,12 @@ deployment:
     env:
       - name: ENVIRONMENT
         value: test
+
       - name: MQTT_TEST
         value: mqtt://kavanest-simulator
+
+      - name: MQTT_LIVE
+        value: mqtt://192.168.1.46
 
   - name: mosquitto
     image: eclipse-mosquitto:1.6

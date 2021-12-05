@@ -24,11 +24,7 @@ export default class HeatingSensor {
       err ? console.log(err) : null;
     });
 
-<<<<<<< HEAD:src/components/devices/components/heatingSensorBridge.ts
     this.kavanestMQTT.on("connect", () => console.log("Simulator connected to mqtt.kavanet.io"));
-=======
-    this.kavanestMQTT.on("connect", () => console.log(`${this.name} sensor bridging from ${process.env.MQTT_LIVE}`));
->>>>>>> Added multiple environments and a bunch of other changes:src/components/devices/components/heatingSensorRelay.ts
 
     this.kavanestMQTT.on("message", (_, rawPayload) => {
       const payload = JSON.parse(rawPayload.toString());

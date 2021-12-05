@@ -10,6 +10,7 @@ import { mqttUrl } from "./components/utils";
 /////////////
 // MQTT Stuff
 let client: mqtt.MqttClient;
+console.log(mqttUrl);
 client = mqtt.connect(mqttUrl);
 
 client.subscribe("#", (err) => {

@@ -5,12 +5,12 @@ export let mqttUrl: string = "";
 
 switch (environment) {
   case "live":
-    console.log("Running on cluster 🗄️");
+    console.log("Running in live 🔥");
     mqttUrl = process.env.MQTT_LIVE ?? "";
     break;
 
   case "test":
-    console.log("Running on cluster 🗄️");
+    console.log("Running in test 🧪");
     mqttUrl = process.env.MQTT_TEST ?? "";
     break;
 
