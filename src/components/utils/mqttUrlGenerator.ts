@@ -16,10 +16,11 @@ switch (environment) {
 
   case "local":
     console.log("Running locally on this computer💻");
-    mqttUrl = process.env.MQTT_LOCAL ?? ""; // Development
+    mqttUrl = process.env.MQTT_LOCAL ?? "";
     break;
 
   case "docker":
     console.log("Running in docker 🐳");
+    mqttUrl = process.env.MQTT_DOCKER ?? "";
     break;
 }
