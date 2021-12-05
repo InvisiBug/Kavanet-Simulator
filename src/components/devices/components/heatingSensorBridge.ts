@@ -1,5 +1,6 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect } from "../../helpers";
+import { randFutureTime, shouldUpdate, publishOnConnect } from "../../utils";
+require("dotenv").config();
 export default class HeatingSensor {
   name: string;
   temperature: number = 0;
@@ -17,13 +18,17 @@ export default class HeatingSensor {
     this.client = client;
     this.topic = deviceConfig.topic;
 
-    this.kavanestMQTT = mqtt.connect("mqtt://192.168.1.46");
+    this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
 
     this.kavanestMQTT.subscribe(deviceConfig.topic, (err) => {
       err ? console.log(err) : null;
     });
 
+<<<<<<< HEAD:src/components/devices/components/heatingSensorBridge.ts
     this.kavanestMQTT.on("connect", () => console.log("Simulator connected to mqtt.kavanet.io"));
+=======
+    this.kavanestMQTT.on("connect", () => console.log(`${this.name} sensor bridging from ${process.env.MQTT_LIVE}`));
+>>>>>>> Added multiple environments and a bunch of other changes:src/components/devices/components/heatingSensorRelay.ts
 
     this.kavanestMQTT.on("message", (_, rawPayload) => {
       const payload = JSON.parse(rawPayload.toString());

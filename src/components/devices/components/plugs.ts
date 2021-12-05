@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../helpers";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../utils";
 
 export default class Plug {
   client: MqttClient;

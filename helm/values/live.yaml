@@ -1,7 +1,5 @@
 name: kavanest-simulator
 
-namespace: kavanest
-
 deployment:
   - name: mosquitto
     image: eclipse-mosquitto:1.6
@@ -15,13 +13,10 @@ deployment:
     - port: 1883
     - port: 9001
     env:
-      - name: CLUSTER
-        value: cluster
-      - name: MQTT_LOCAL
-        value: mqtt://localhost
-      - name: MQTT_CLUSTER
-        value: mqtt://mosquitto
-
+      - name: ENVIRONMENT
+        value: test
+      - name: MQTT_TEST
+        value: 192.168.1.46
 
 service:
   clusterIP:
