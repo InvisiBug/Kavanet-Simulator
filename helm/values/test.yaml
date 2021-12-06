@@ -1,0 +1,50 @@
+name: kavanest-test-simulator
+
+namespace: kavanest-test
+
+deployment:
+  - name: kavanest-simulator
+    image: 192.168.1.61:5000/kavanest-simulator
+    ports:
+    - port: 1883
+    - port: 9001
+    env:
+      - name: ENVIRONMENT
+        value: test
+
+      - name: MQTT_TEST
+        value: mqtt://kavanest-simulator
+
+      - name: MQTT_LIVE
+        value: mqtt://192.168.1.46
+
+  - name: mosquitto
+    image: eclipse-mosquitto:1.6
+    ports:
+    - port: 1883
+    - port: 9001
+
+  - name: kavanest-test-mongo
+    image: mongo:bionic
+    ports:
+    - port: 27017
+    volumes:
+    - type: pvc
+      name: mongo-store
+      path: /data/db
+
+pvc:
+  - name: mongo-store
+    storage: 100Mi
+
+service:
+  loadBalancer:
+    - name: kavanest-test-mongo
+      selector: kavanest-test-mongo
+      port: 27017
+      containerPort: 27017
+
+    - name: kavanest-simulator
+      selector: mosquitto
+      port: 1883
+      containerPort: 1883

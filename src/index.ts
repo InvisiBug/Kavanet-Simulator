@@ -5,31 +5,37 @@ require("dotenv").config();
 import chalk from "chalk";
 import mqtt from "mqtt";
 import path from "path";
+import { mqttUrl } from "./components/utils";
 
-let client = mqtt.connect(process.env.MQTT ?? "");
+/////////////
+// MQTT Stuff
+let client: mqtt.MqttClient;
+console.log(mqttUrl);
+client = mqtt.connect(mqttUrl);
 
 client.subscribe("#", (err) => {
-  err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
+  err
+    ? console.log("Error, You probably dont have an MQTT broker running")
+    : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
 });
 
 client.on("message", (_, payload) => {
   console.log(chalk.yellow(payload.toString()));
 });
 
-client.on("connect", () => console.log("Simulator connected to", process.env.MQTT ?? ""));
+client.on("connect", () => console.log("Simulator connected to", mqttUrl));
+
+//////////
+// Devices
+const deviceConfig: any = load(readFileSync(path.resolve(__dirname, "./devices.yaml"), "utf-8"));
 
 let devices: Array<any> = [];
-
-//* Config'd devices
-const deviceConfig: any = load(readFileSync(path.resolve(__dirname, "./devices.yaml"), "utf-8"));
 
 for (let deviceType in deviceConfig) {
   deviceConfig[deviceType].forEach((node: any) => {
     devices.push(DeviceCreator(client, node, deviceType));
   });
 }
-
-console.log();
 
 setInterval(() => {
   try {

@@ -1,5 +1,6 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect, randInteger } from "../../helpers";
+import { randFutureTime, shouldUpdate, publishOnConnect } from "../../utils";
+require("dotenv").config();
 export default class HeatingSensor {
   name: string;
   temperature: number = 0;
@@ -17,7 +18,7 @@ export default class HeatingSensor {
     this.client = client;
     this.topic = deviceConfig.topic;
 
-    this.kavanestMQTT = mqtt.connect("mqtt://192.168.1.46");
+    this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
 
     this.kavanestMQTT.subscribe(deviceConfig.topic, (err) => {
       err ? console.log(err) : null;

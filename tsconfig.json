@@ -3,7 +3,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noEmitOnError": true,
-    "noUnusedLocals": false, // ! Turn this back on later
+    "noUnusedLocals": false,
     "noUnusedParameters": false,
     "resolveJsonModule": true,
     "strict": true,
@@ -11,6 +11,5 @@
     "outDir": "dist/"
   },
   "include": [
-    "src/*"
-, "src/components/helpers"  ]
+    "src/*"  ]
 }

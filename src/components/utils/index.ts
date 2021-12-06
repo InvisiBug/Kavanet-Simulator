@@ -23,3 +23,5 @@ export const shouldUpdate = (lastSent: number) => {
 export const publishOnConnect = () => {
   return false;
 };
+
+export { mqttUrl } from "./mqttUrlGenerator";

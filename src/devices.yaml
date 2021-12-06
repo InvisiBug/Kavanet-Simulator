@@ -25,9 +25,22 @@
 #     fluctuation: true
 
 heatingSensorBridges:
-  - name: outside
+  - name: livingRoom
+    topic: Living Room Heating Sensor
+
+  - name: kitchen
+    topic: Kitchen Heating Sensor
+
+  - name: liamsRoom
+    topic: Liams Room Heating Sensor
+
+  - name: study
+    topic: Study Heating Sensor
+
+  - name: ourRoom
     topic: Our Room Heating Sensor
 
+<<<<<<< HEAD
 
 # plugs:
 #   - name: sun
@@ -37,6 +50,12 @@ heatingSensorBridges:
 #   - name: floodlight
 #     controlTopic: Plug Control
 #     topic: Plug
+=======
+plugs:
+  - name: sun
+    controlTopic: Sun Control
+    topic: Sun
+>>>>>>> Evironment dependent mqtt
 
 #   - name: radiatorFan
 #     controlTopic: Radiator Fan Control
@@ -86,3 +105,9 @@ heatingSensorBridges:
 #   - name: computerAudio
 #     topic: computerAudio
 
+<<<<<<< HEAD
+=======
+specials:
+  - name: computerAudio
+    topic: computerAudio
+>>>>>>> Added multiple environments and a bunch of other changes

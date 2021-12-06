@@ -10,11 +10,12 @@ services:
     networks:
       - proxynet
     environment:
-      - MQTT=mqtt://mosquitto
+      - ENVIRONMENT=docker
+      - MQTT_DOCKER=mqtt://mosquitto
 
   mosquitto:
     image: eclipse-mosquitto:1.6
-    container_name: kavanest-sim-mqtt
+    container_name: mosquitto
     expose:
       - 1883
       - 9001
@@ -23,6 +24,16 @@ services:
       - 9001:9001
     networks:
       - proxynet
+
+  kavanest-mongo:
+    container_name: kavanest-mongo
+    image: mongo
+    networks:
+      - proxynet
+    # volumes:
+    # - ./data:/data/db
+    ports:
+      - "27017:27017"
 
 networks:
   proxynet:

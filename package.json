@@ -7,7 +7,11 @@
   "license": "ISC",
   "scripts": {
     "dev": "nodemon --exec \"ts-node \" ./src/index.ts",
-    "build": "tsc",
+    "build": "tsc && cp ./src/devices.yaml ./dist",
+    "run": "yarn build && node ./dist/index.js",
+    "push": "./bin/push.sh",
+    "deploy--live": "./bin/deploy--live.sh",
+    "deploy--test": "./bin/deploy--test.sh",
     "up": "clear && ./bin/start-container.sh",
     "down": "docker-compose down",
     "logs": "docker logs simulator -f"
