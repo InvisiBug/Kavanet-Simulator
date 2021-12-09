@@ -24,14 +24,14 @@ export default class HeatingSensor {
       err ? console.log(err) : null;
     });
 
-    this.kavanestMQTT.on("connect", () => console.log("Simulator connected to mqtt.kavanet.io"));
+    this.kavanestMQTT.on("connect", () => console.log(`${this.name} sensor relay connected to mqtt.kavanet.io`));
 
     this.kavanestMQTT.on("message", (_, rawPayload) => {
       const payload = JSON.parse(rawPayload.toString());
       this.temperature = payload.temperature;
       this.humidity = payload.humidity;
 
-      console.log(this.temperature, this.humidity);
+      // console.log(this.name, this.temperature, this.humidity);
     });
 
     this.timeToSend = randFutureTime();
