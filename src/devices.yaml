@@ -65,18 +65,23 @@ plugs:
 valves:
   - name: livingRoom
     topic: Living Room Radiator Valve
+    controlTopic: Living Room Radiator Valve Control
 
-  - name: kitchen
-    topic: Kitchen Radiator Valve
+  # - name: kitchen
+  #   topic: Kitchen Radiator Valve
+  #   controlTopic: Kitchen Radiator Valve Control
 
   - name: liamsRoom
     topic: Liams Room Radiator Valve
+    controlTopic: Liams Room Radiator Valve Control
 
   - name: study
     topic: Study Radiator Valve
+    controlTopic: Study Radiator Valve Control
 
   - name: ourRoom
     topic: Our Room Radiator Valve
+    controlTopic: Our Room Radiator Valve Control
 
 
 rgbLights:
