@@ -46,7 +46,7 @@ plugs:
     topic: Sun
 
   - name: floodLight
-    constolTopic: Plug Control
+    controlTopic: Plug Control
     topic: Plug
 
   - name: radiatorFan
