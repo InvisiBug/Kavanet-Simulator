@@ -87,14 +87,17 @@ valves:
 rgbLights:
 - name: deskLEDs
   topic: Desk LEDs
+  controlTopic: Desk LEDs Control
   multiMode: false
 
 - name: tableLamp
   topic: Table Lamp
+  controlTopic: Table Lamp Control
   multiMode: true
 
 - name: screenLEDs
   topic: Screen LEDs
+  controlTopic: Screen LEDs Control
   multiMode: true
 
 
