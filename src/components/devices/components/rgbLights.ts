@@ -48,6 +48,7 @@ export default class RBGLight {
       this.topic,
       JSON.stringify({
         node: this.name,
+        type: "rgbLights",
         red: this.red,
         green: this.green,
         blue: this.blue,
