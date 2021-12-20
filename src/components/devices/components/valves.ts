@@ -41,6 +41,7 @@ export default class Valves {
       this.topic,
       JSON.stringify({
         node: `${this.name} radiator valve`,
+        type: "valve",
         state: this.state,
       }),
     );

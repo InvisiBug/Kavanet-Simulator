@@ -52,6 +52,7 @@ export default class ComputerAudio {
       `${this.nodeName}`,
       JSON.stringify({
         Node: this.nodeName,
+        type: "special",
         Left: this.left,
         Right: this.right,
         Sub: this.sub,

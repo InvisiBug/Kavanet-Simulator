@@ -39,6 +39,7 @@ export default class Plug {
     this.client.publish(
       this.topic,
       JSON.stringify({
+        type: "1/0",
         node: this.name,
         state: this.state,
       }),
