@@ -1,44 +1,57 @@
-# heatingSensors:
-#   - name: livingRoom
-#     topic: Living Room Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: kitchen
-#     topic: Kitchen Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: liamsRoom
-#     topic: Liams Room Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: study
-#     topic: Study Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: ourRoom
-#     topic: Our Room Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
 heatingSensorBridges:
   - name: livingRoom
     topic: Living Room Heating Sensor
 
-  - name: kitchen
-    topic: Kitchen Heating Sensor
+heatingSensors:
+  - name: diningRoom
+    topic: Dining Room Heating Sensor
+    startingTemp: 16
+    fluctuation: true
 
-  - name: liamsRoom
-    topic: Liams Room Heating Sensor
+  - name: frontStudy
+    topic: Front Study Heating Sensor
+    startingTemp: 16
+    fluctuation: true
 
-  - name: study
-    topic: Study Heating Sensor
+  - name: rearStudy
+    topic: Rear Study Heating Sensor
+    startingTemp: 16
+    fluctuation: true
 
-  - name: ourRoom
-    topic: Our Room Heating Sensor
+  - name: frontBedroom
+    topic: Front Bedroom Heating Sensor
+    startingTemp: 16
+    fluctuation: true
+
+  - name: rearBedroom
+    topic: Rear Bedroom Heating Sensor
+    startingTemp: 16
+    fluctuation: true
+
+valves:
+  - name: livingRoom
+    topic: Living Room Radiator Valve
+    controlTopic: Living Room Radiator Valve Control
+
+  - name: diningRoom
+    topic: Dining Room Radiator Valve
+    controlTopic: Dining Room Radiator Valve Control
+
+  - name: frontStudy
+    topic: Front Study Radiator Valve
+    controlTopic: Front Study Radiator Valve Control
+
+  - name: rearStudy
+    topic: Rear Study Radiator Valve
+    controlTopic: Rear Study Radiator Valve Control
+
+  - name: frontBedroom
+    topic: Front Bedroom Radiator Valve
+    controlTopic: Front Bedroom Radiator Valve Control
+
+  - name: rearBedroom
+    topic: Rear Bedroom Radiator Valve
+    controlTopic: Rear Bedroom Radiator Valve Control
 
 plugs:
   - name: sun
@@ -60,28 +73,6 @@ plugs:
   - name: computerPower
     controlTopic: Computer Power Control
     topic: Computer Power
-
-
-valves:
-  - name: livingRoom
-    topic: Living Room Radiator Valve
-    controlTopic: Living Room Radiator Valve Control
-
-  # - name: kitchen
-  #   topic: Kitchen Radiator Valve
-  #   controlTopic: Kitchen Radiator Valve Control
-
-  - name: liamsRoom
-    topic: Liams Room Radiator Valve
-    controlTopic: Liams Room Radiator Valve Control
-
-  - name: study
-    topic: Study Radiator Valve
-    controlTopic: Study Radiator Valve Control
-
-  - name: ourRoom
-    topic: Our Room Radiator Valve
-    controlTopic: Our Room Radiator Valve Control
 
 
 rgbLights:
