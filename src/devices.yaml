@@ -1,32 +1,32 @@
-heatingSensorBridges:
-  - name: livingRoom
-    topic: Living Room Heating Sensor
+# heatingSensorBridges:
+#   - name: livingRoom
+#     topic: Living Room Heating Sensor
 
-heatingSensors:
-  - name: diningRoom
-    topic: Dining Room Heating Sensor
-    startingTemp: 16
-    fluctuation: true
+# heatingSensors:
+#   - name: diningRoom
+#     topic: Dining Room Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
 
-  - name: frontStudy
-    topic: Front Study Heating Sensor
-    startingTemp: 16
-    fluctuation: true
+#   - name: frontStudy
+#     topic: Front Study Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
 
-  - name: rearStudy
-    topic: Rear Study Heating Sensor
-    startingTemp: 16
-    fluctuation: true
+#   - name: rearStudy
+#     topic: Rear Study Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
 
-  - name: frontBedroom
-    topic: Front Bedroom Heating Sensor
-    startingTemp: 16
-    fluctuation: true
+#   - name: frontBedroom
+#     topic: Front Bedroom Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
 
-  - name: rearBedroom
-    topic: Rear Bedroom Heating Sensor
-    startingTemp: 16
-    fluctuation: true
+#   - name: rearBedroom
+#     topic: Rear Bedroom Heating Sensor
+#     startingTemp: 16
+#     fluctuation: true
 
 valves:
   - name: livingRoom
