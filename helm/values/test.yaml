@@ -13,7 +13,7 @@ deployment:
         value: test
 
       - name: MQTT_TEST
-        value: mqtt://kavanest-simulator
+        value: mqtt://kavanest-test-simulator
 
       - name: MQTT_LIVE
         value: mqtt://192.168.1.46
