@@ -20,7 +20,7 @@ export default class HeatingSensor {
 
     this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
 
-    this.kavanestMQTT.subscribe(deviceConfig.topic, (err) => {
+    this.kavanestMQTT.subscribe(deviceConfig.physicalDeviceTopic, (err) => {
       err ? console.log(err) : null;
     });
 
@@ -44,8 +44,8 @@ export default class HeatingSensor {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        node: `${this.name} Heating Sensor`,
         type: "heatingSensor",
+        node: `${this.name} Heating Sensor`,
         temperature: this.temperature,
         humidity: this.humidity,
       }),
