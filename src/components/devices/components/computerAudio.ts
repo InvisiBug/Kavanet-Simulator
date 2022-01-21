@@ -50,8 +50,8 @@ export default class ComputerAudio {
     this.client.publish(
       `${this.nodeName}`,
       JSON.stringify({
-        Node: this.nodeName,
         type: "special",
+        Node: this.nodeName,
         Left: this.left,
         Right: this.right,
         Sub: this.sub,
