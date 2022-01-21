@@ -27,28 +27,28 @@ heatingSensors:
 
 valves:
   - name: livingRoom
-    topic: Living Room Radiator Valve
-    controlTopic: Living Room Radiator Valve Control
+    topic: Living Room Valve
+    controlTopic: Living Room Valve Control
 
   - name: diningRoom
-    topic: Dining Room Radiator Valve
-    controlTopic: Dining Room Radiator Valve Control
+    topic: Dining Room Valve
+    controlTopic: Dining Room Valve Control
 
   - name: frontStudy
-    topic: Front Study Radiator Valve
-    controlTopic: Front Study Radiator Valve Control
+    topic: Front Study Valve
+    controlTopic: Front Study Valve Control
 
   - name: rearStudy
-    topic: Rear Study Radiator Valve
-    controlTopic: Rear Study Radiator Valve Control
+    topic: Rear Study Valve
+    controlTopic: Rear Study Valve Control
 
   - name: frontBedroom
-    topic: Front Bedroom Radiator Valve
-    controlTopic: Front Bedroom Radiator Valve Control
+    topic: Front Bedroom Valve
+    controlTopic: Front Bedroom Valve Control
 
   - name: rearBedroom
-    topic: Rear Bedroom Radiator Valve
-    controlTopic: Rear Bedroom Radiator Valve Control
+    topic: Rear Bedroom Valve
+    controlTopic: Rear Bedroom Valve Control
 
 plugs:
   - name: sun
