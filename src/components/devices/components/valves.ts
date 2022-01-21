@@ -23,7 +23,7 @@ export default class Valves {
   handleIncoming(topic: String, rawPayload: Object) {
     if (topic === this.controlTopic) {
       const payload = JSON.parse(rawPayload.toString());
-      console.log(payload);
+      // console.log(payload);
 
       if (payload === 1) {
         this.state = true;
