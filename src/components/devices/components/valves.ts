@@ -23,7 +23,7 @@ export default class Valves {
   handleIncoming(topic: String, rawPayload: Object) {
     if (topic === this.controlTopic) {
       const payload = JSON.parse(rawPayload.toString());
-      console.log(payload);
+      // console.log(payload);
 
       if (payload === 1) {
         this.state = true;
@@ -40,8 +40,8 @@ export default class Valves {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        node: `${this.name} radiator valve`,
         type: "valve",
+        node: `${this.name} radiator valve`,
         state: this.state,
       }),
     );

@@ -7,8 +7,6 @@ export default class HeatingSensor {
   humidity: number = 0;
   topic: string;
 
-  timeToSend: number;
-
   kavanestMQTT: MqttClient;
   client: MqttClient;
 
@@ -20,7 +18,7 @@ export default class HeatingSensor {
 
     this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
 
-    this.kavanestMQTT.subscribe(deviceConfig.topic, (err) => {
+    this.kavanestMQTT.subscribe(deviceConfig.physicalDeviceTopic, (err) => {
       err ? console.log(err) : null;
     });
 
@@ -31,21 +29,19 @@ export default class HeatingSensor {
         const payload = JSON.parse(rawPayload.toString());
         this.temperature = payload.temperature;
         this.humidity = payload.humidity;
+        this.publish();
       } catch (err) {
         console.log(`${this.name} sensor disconnected`);
       }
     });
-
-    this.timeToSend = randFutureTime();
-    publishOnConnect() ? this.publish() : null;
   }
 
   publish() {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        node: `${this.name} Heating Sensor`,
-        type: "heatingSensor",
+        type: "Sensor",
+        node: `${this.name} Sensor`,
         temperature: this.temperature,
         humidity: this.humidity,
       }),
@@ -54,11 +50,5 @@ export default class HeatingSensor {
 
   handleIncoming(topic: string, payload: object) {}
 
-  tick() {
-    let now = new Date().getTime();
-    if (shouldUpdate(this.timeToSend)) {
-      this.timeToSend = now;
-      this.publish();
-    }
-  }
+  tick() {}
 }
