@@ -1,27 +1,27 @@
 heatingSensorBridges:
   - name: livingRoom
-    physicalDeviceTopic: Living Room Heating Sensor
-    topic: Living Room Heating Sensor
+    physicalDeviceTopic: Living Room Sensor
+    topic: Living Room Sensor
 
   - name: diningRoom
-    physicalDeviceTopic: Dining Room Heating Sensor
-    topic: Kitchen Heating Sensor
+    physicalDeviceTopic: Dining Room Sensor
+    topic: Dining Room Sensor
 
   - name: frontStudy
-    physicalDeviceTopic: Our Room Heating Sensor
-    topic: Front Study Heating Sensor
+    physicalDeviceTopic: Front Study Sensor
+    topic: Front Study Sensor
 
   - name: rearStudy
-    physicalDeviceTopic: Liams Room Heating Sensor
-    topic: Rear Study Heating Sensor
+    physicalDeviceTopic: Rear Study Sensor
+    topic: Rear Study Sensor
 
   - name: frontBedroom
-    physicalDeviceTopic: Our Room Heating Sensor
-    topic: Front Bedroom Heating Sensor
+    physicalDeviceTopic: Front Bedroom Sensor
+    topic: Front Bedroom Sensor
 
 heatingSensors:
   - name: rearBedroom
-    topic: Rear Bedroom Heating Sensor
+    topic: Rear Bedroom Sensor
     startingTemp: 16
     fluctuation: true
 
