@@ -19,11 +19,15 @@ heatingSensorBridges:
     physicalDeviceTopic: Front Bedroom Sensor
     topic: Front Bedroom Sensor
 
-heatingSensors:
   - name: rearBedroom
+    physicalDeviceTopic: Rear Bedroom Sensor
     topic: Rear Bedroom Sensor
-    startingTemp: 16
-    fluctuation: true
+
+# heatingSensors:
+#   - name: rearBedroom
+#     topic: Rear Bedroom Sensor
+#     startingTemp: 16
+#     fluctuation: true
 
 valves:
   - name: livingRoom
@@ -56,8 +60,12 @@ plugs:
     topic: Sun
 
   - name: floodLight
-    controlTopic: Plug Control
-    topic: Plug
+    controlTopic: Floodlight Control
+    topic: Floodlight
+
+  - name: mattress
+    controlTopic: Mattress Control
+    topic: Mattress
 
   - name: radiatorFan
     controlTopic: Radiator Fan Control
