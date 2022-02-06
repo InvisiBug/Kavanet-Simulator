@@ -79,7 +79,6 @@ plugs:
     controlTopic: Computer Power Control
     topic: Computer Power
 
-
 rgbLights:
 - name: deskLEDs
   topic: Desk LEDs
@@ -95,7 +94,6 @@ rgbLights:
   topic: Screen LEDs
   controlTopic: Screen LEDs Control
   multiMode: true
-
 
 specials:
   - name: computerAudio
