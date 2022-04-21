@@ -7,6 +7,7 @@ import mqtt from "mqtt";
 import path from "path";
 import { mqttUrl } from "./components/utils";
 
+import RadiatorMonitorBridge from "./components/devices/components/radiatorSensorBridge";
 /////////////
 // MQTT Stuff
 let client: mqtt.MqttClient;
@@ -36,6 +37,8 @@ for (let deviceType in deviceConfig) {
     devices.push(DeviceCreator(client, node, deviceType));
   });
 }
+
+devices.push(new RadiatorMonitorBridge(client));
 
 setInterval(() => {
   try {

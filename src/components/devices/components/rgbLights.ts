@@ -26,7 +26,8 @@ export default class RBGLight {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === this.topic) {
+    if (topic === this.controlTopic) {
+      console.log(rawPayload.toString());
       const payload = JSON.parse(rawPayload.toString());
 
       if (payload === 1) {
@@ -34,9 +35,9 @@ export default class RBGLight {
       } else if (payload === 0) {
         this.mode = 0;
       } else {
-        this.red = JSON.parse(payload).red;
-        this.green = JSON.parse(payload).green;
-        this.blue = JSON.parse(payload).blue;
+        this.red = payload.red;
+        this.green = payload.green;
+        this.blue = payload.blue;
       }
       this.publish();
     }
@@ -44,8 +45,9 @@ export default class RBGLight {
 
   publish() {
     this.client.publish(
-      this.name,
+      this.topic,
       JSON.stringify({
+        type: "rgbLights",
         node: this.name,
         red: this.red,
         green: this.green,

@@ -11,6 +11,7 @@ services:
       - proxynet
     environment:
       - ENVIRONMENT=docker
+      - MQTT_LIVE=mqtt://kavanet.io # For the sensor bridge connection
       - MQTT_DOCKER=mqtt://mosquitto
 
   mosquitto:

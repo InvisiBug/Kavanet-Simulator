@@ -31,6 +31,7 @@ export default class HeatingSensor {
     this.client.publish(
       this.topic,
       JSON.stringify({
+        type: "heatingSensor",
         node: `${this.name} Heating Sensor`,
         temperature: this.temperature,
         humidity: this.humidity,

@@ -1,113 +1,100 @@
-# heatingSensors:
-#   - name: livingRoom
-#     topic: Living Room Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: kitchen
-#     topic: Kitchen Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: liamsRoom
-#     topic: Liams Room Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: study
-#     topic: Study Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
-#   - name: ourRoom
-#     topic: Our Room Heating Sensor
-#     startingTemp: 16
-#     fluctuation: true
-
 heatingSensorBridges:
   - name: livingRoom
-    topic: Living Room Heating Sensor
+    physicalDeviceTopic: Living Room Sensor
+    topic: Living Room Sensor
 
-  - name: kitchen
-    topic: Kitchen Heating Sensor
+  - name: diningRoom
+    physicalDeviceTopic: Dining Room Sensor
+    topic: Dining Room Sensor
 
-  - name: liamsRoom
-    topic: Liams Room Heating Sensor
+  - name: frontStudy
+    physicalDeviceTopic: Front Study Sensor
+    topic: Front Study Sensor
 
-  - name: study
-    topic: Study Heating Sensor
+  - name: rearStudy
+    physicalDeviceTopic: Rear Study Sensor
+    topic: Rear Study Sensor
 
-  - name: ourRoom
-    topic: Our Room Heating Sensor
+  - name: frontBedroom
+    physicalDeviceTopic: Front Bedroom Sensor
+    topic: Front Bedroom Sensor
 
-<<<<<<< HEAD
+  - name: rearBedroom
+    physicalDeviceTopic: Rear Bedroom Sensor
+    topic: Rear Bedroom Sensor
 
-# plugs:
-#   - name: sun
-#     controlTopic: Sun Control
-#     topic: Sun
+# heatingSensors:
+#   - name: rearBedroom
+#     topic: Rear Bedroom Sensor
+#     startingTemp: 16
+#     fluctuation: true
 
-#   - name: floodlight
-#     controlTopic: Plug Control
-#     topic: Plug
-=======
+valves:
+  - name: livingRoom
+    topic: Living Room Valve
+    controlTopic: Living Room Valve Control
+
+  - name: diningRoom
+    topic: Dining Room Valve
+    controlTopic: Dining Room Valve Control
+
+  - name: frontStudy
+    topic: Front Study Valve
+    controlTopic: Front Study Valve Control
+
+  - name: rearStudy
+    topic: Rear Study Valve
+    controlTopic: Rear Study Valve Control
+
+  - name: frontBedroom
+    topic: Front Bedroom Valve
+    controlTopic: Front Bedroom Valve Control
+
+  - name: rearBedroom
+    topic: Rear Bedroom Valve
+    controlTopic: Rear Bedroom Valve Control
+
 plugs:
   - name: sun
     controlTopic: Sun Control
     topic: Sun
->>>>>>> Evironment dependent mqtt
 
-#   - name: radiatorFan
-#     controlTopic: Radiator Fan Control
-#     topic: Radiator Fan
+  - name: floodLight
+    controlTopic: Floodlight Control
+    topic: Floodlight
 
-#   - name: heating
-#     controlTopic: Heating Control
-#     topic: Heating
+  - name: mattress
+    controlTopic: Mattress Control
+    topic: Mattress
 
-#   - name: computerPower
-#     controlTopic: Computer Power Control
-#     topic: Computer Power
+  - name: radiatorFan
+    controlTopic: Radiator Fan Control
+    topic: Radiator Fan
 
+  - name: heating
+    controlTopic: Heating Control
+    topic: Heating
 
-# valves:
-#   - name: livingRoom
-#     topic: Living Room Radiator Valve
+  - name: computerPower
+    controlTopic: Computer Power Control
+    topic: Computer Power
 
-#   - name: kitchen
-#     topic: Kitchen Radiator Valve
+rgbLights:
+- name: deskLEDs
+  topic: Desk LEDs
+  controlTopic: Desk LED Control
+  multiMode: false
 
-#   - name: liamsRoom
-#     topic: Liams Room Radiator Valve
+- name: tableLamp
+  topic: Table Lamp
+  controlTopic: Table Lamp Control
+  multiMode: true
 
-#   - name: study
-#     topic: Study Radiator Valve
+- name: screenLEDs
+  topic: Screen LEDs
+  controlTopic: Screen LEDs Control
+  multiMode: true
 
-#   - name: ourRoom
-#     topic: Our Room Radiator Valve
-
-
-# rgbLights:
-# - name: deskLEDs
-#   topic: Desk LEDs
-#   multiMode: false
-
-# - name: tableLamp
-#   topic: Table Lamp
-#   multiMode: true
-
-# - name: screenLEDs
-#   topic: Screen LEDs
-#   multiMode: true
-
-
-# specials:
-#   - name: computerAudio
-#     topic: computerAudio
-
-<<<<<<< HEAD
-=======
 specials:
   - name: computerAudio
     topic: computerAudio
->>>>>>> Added multiple environments and a bunch of other changes

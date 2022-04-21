@@ -34,12 +34,11 @@ export default class ComputerAudio {
         this.sub = false;
         this.mixer = false;
       } else {
-        let data = JSON.parse(payload);
         // The actual device still uses captials
-        this.left = data.Left;
-        this.right = data.Right;
-        this.sub = data.Sub;
-        this.mixer = data.Mixer;
+        this.left = payload.Left;
+        this.right = payload.Right;
+        this.sub = payload.Sub;
+        this.mixer = payload.Mixer;
         // console.error("invalid message");
       }
       this.publish();
@@ -51,6 +50,7 @@ export default class ComputerAudio {
     this.client.publish(
       `${this.nodeName}`,
       JSON.stringify({
+        type: "special",
         Node: this.nodeName,
         Left: this.left,
         Right: this.right,
