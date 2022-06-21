@@ -17,18 +17,3 @@ deployment:
 
       - name: MQTT_LIVE
         value: mqtt://192.168.1.46
-
-# helm upgrade -f ./values/test.yaml kavanest-test-mongo .
-
-  # - name: kavanest-test-mqtt
-  #   image: eclipse-mosquitto:1.6
-  #   ports:
-  #   - port: 1883
-  #   - port: 9001
-
-service:
-  loadBalancer:
-    # - name: kavanest-test-simulator
-    #   selector: kavanest-test-mqtt
-    #   port: 1883
-    #   containerPort: 1883
