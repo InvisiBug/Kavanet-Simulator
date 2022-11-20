@@ -24,6 +24,31 @@ heatingSensorBridges:
     topic: Rear Bedroom Sensor
 
 # heatingSensors:
+#   - name: livingRoom
+#     topic: Living Room Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: diningRoom
+#     topic: Dining Room Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: frontStudy
+#     topic: Front Study Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: rearStudy
+#     topic: Rear Study Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: frontBedroom
+#     topic: Front Bedroom Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
 #   - name: rearBedroom
 #     topic: Rear Bedroom Sensor
 #     startingTemp: 16
@@ -58,6 +83,10 @@ plugs:
   - name: sun
     controlTopic: Sun Control
     topic: Sun
+
+  - name: lamp
+    controlTopic: Lamp Control
+    topic: Lamp
 
   - name: floodLight
     controlTopic: Floodlight Control

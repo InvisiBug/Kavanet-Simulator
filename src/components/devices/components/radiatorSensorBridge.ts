@@ -27,7 +27,7 @@ export default class RadiatorMonitor {
     this.kavanestMQTT.on("message", (_, rawPayload) => {
       try {
         const payload = JSON.parse(rawPayload.toString());
-        console.log(payload);
+        // console.log(payload);
         this.inlet = payload.inlet;
         this.outlet = payload.outlet;
         this.publish();
