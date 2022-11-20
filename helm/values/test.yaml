@@ -9,10 +9,7 @@ deployment:
     - port: 1883
     - port: 9001
     env:
-      - name: ENVIRONMENT
-        value: test
-
-      - name: MQTT_TEST
+      - name: MQTT
         value: mqtt://kavanest-test-mqtt
 
       - name: MQTT_LIVE

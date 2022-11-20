@@ -17,6 +17,11 @@ export default class HeatingSensor {
     this.topic = deviceConfig.topic;
 
     this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
+    // try {
+    // } catch {
+    //   this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
+    //   console.log("MQTT undable to connect");
+    // }
 
     this.kavanestMQTT.subscribe(deviceConfig.physicalDeviceTopic, (err) => {
       err ? console.log(err) : null;

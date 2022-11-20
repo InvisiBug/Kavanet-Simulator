@@ -1,22 +1,22 @@
 version: "3.1"
 
 services:
-  simulator:
-    container_name: kavanest-simulator
-    image: kavanest-simulator
-    build:
-      context: .
-      dockerfile: Dockerfile
-    networks:
-      - proxynet
-    environment:
-      - ENVIRONMENT=docker
-      - MQTT_LIVE=mqtt://kavanet.io # For the sensor bridge connection
-      - MQTT_DOCKER=mqtt://mosquitto
+  # simulator:
+  #   container_name: kavanest-simulator
+  #   image: kavanest-simulator
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   networks:
+  #     - proxynet
+  #   environment:
+  #     - ENVIRONMENT=docker
+  #     - MQTT_LIVE=mqtt://kavanet.io # For the sensor bridge connection
+  #     - MQTT_DOCKER=mqtt://mosquitto
 
   mosquitto:
     image: eclipse-mosquitto:1.6
-    container_name: mosquitto
+    container_name: kavanest-mqtt
     expose:
       - 1883
       - 9001
