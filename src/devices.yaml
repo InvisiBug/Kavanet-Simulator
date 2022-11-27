@@ -79,6 +79,11 @@ valves:
     topic: Rear Bedroom Valve
     controlTopic: Rear Bedroom Valve Control
 
+radiators:
+  - name: frontStudy
+    topic: Front Study Radiator
+    controlTopic: Front Study Radiator Control
+
 plugs:
   - name: sun
     controlTopic: Sun Control

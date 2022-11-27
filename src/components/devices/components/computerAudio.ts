@@ -34,11 +34,10 @@ export default class ComputerAudio {
         this.sub = false;
         this.mixer = false;
       } else {
-        // The actual device still uses captials
-        this.left = payload.Left;
-        this.right = payload.Right;
-        this.sub = payload.Sub;
-        this.mixer = payload.Mixer;
+        this.left = payload.left;
+        this.right = payload.right;
+        this.sub = payload.sub;
+        this.mixer = payload.mixer;
         // console.error("invalid message");
       }
       this.publish();
