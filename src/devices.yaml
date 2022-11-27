@@ -63,10 +63,6 @@ valves:
     topic: Dining Room Valve
     controlTopic: Dining Room Valve Control
 
-  - name: frontStudy
-    topic: Front Study Valve
-    controlTopic: Front Study Valve Control
-
   - name: rearStudy
     topic: Rear Study Valve
     controlTopic: Rear Study Valve Control
