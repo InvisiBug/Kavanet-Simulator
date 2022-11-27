@@ -39,7 +39,7 @@ for (let deviceType in deviceConfig) {
   });
 }
 
-devices.push(new RadiatorMonitorBridge(client));
+// devices.push(new RadiatorMonitorBridge(client));
 
 setInterval(() => {
   try {
