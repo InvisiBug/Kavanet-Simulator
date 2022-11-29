@@ -9,7 +9,7 @@ export default class ComputerAudio {
 
   fan: boolean = true;
   valve: boolean = true;
-  temperature: number = 25;
+  inlet: number = 25;
 
   constructor(client: MqttClient, deviceConfig: any) {
     this.topic = deviceConfig.topic;
@@ -41,7 +41,7 @@ export default class ComputerAudio {
         node: this.topic,
         fan: this.fan,
         valve: this.valve,
-        temperature: this.temperature,
+        inlet: this.inlet,
       }),
     );
   }
