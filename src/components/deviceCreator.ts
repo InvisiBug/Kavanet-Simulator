@@ -1,6 +1,6 @@
 import { MqttClient } from "mqtt";
-import RadiatorMonitor from "./devices/components/radiatorSensorBridge";
-import { ComputerAudio, Plugs, Valves, HeatingSensors, RBGLights, HeatingSensorBridges, Radiator } from "./devices/index";
+// import RadiatorMonitor from "./devices/components/radiatorSensorBridge";
+import { ComputerAudio, Plugs, Valves, HeatingSensors, RBGLights, HeatingSensorBridges, Radiator, RadiatorTemperatureBridge } from "./devices/index";
 
 export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
   switch (deviceType) {
@@ -21,6 +21,9 @@ export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
 
     case "radiators":
       return new Radiator(client, deviceConfig);
+
+    case "radiatorTemperatureBridges":
+      return new RadiatorTemperatureBridge(client, deviceConfig);
 
     case "specials":
       if (deviceConfig.name === "computerAudio") return new ComputerAudio(client);
