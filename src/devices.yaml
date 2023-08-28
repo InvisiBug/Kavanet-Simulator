@@ -50,30 +50,27 @@ heatingSensors:
     fluctuation: true
 
 valves:
-  - name: diningRoom
-    topic: Dining Room Valve
-    controlTopic: Dining Room Valve Control
+  - name: livingRoom
+    topic: Living Room Valve
+    controlTopic: Living Room Valve Control
 
-  - name: rearStudy
-    topic: Rear Study Valve
-    controlTopic: Rear Study Valve Control
+  - name: trainingRoom
+    topic: Training Room Valve
+    controlTopic: Training Room Valve Control
 
-  - name: frontBedroom
-    topic: Front Bedroom Valve
-    controlTopic: Front Bedroom Valve Control
+  - name: printerRoom
+    topic: Printer Room Valve
+    controlTopic: Printer Room Valve Control
 
-  - name: rearBedroom
-    topic: Rear Bedroom Valve
-    controlTopic: Rear Bedroom Valve Control
 
 radiators:
-  - name: livingRoom
-    topic: Living Room Radiator
-    controlTopic: Living Room Radiator Control
-
   - name: study
     topic: Study Radiator
     controlTopic: Study Radiator Control
+
+  - name: bedRoom
+    topic: Bed Room Radiator
+    controlTopic: Bed Room Radiator Control
 
 # radiatorTemperatureBridges:
 #   - name: livingRoom
