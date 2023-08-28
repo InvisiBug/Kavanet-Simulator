@@ -1,7 +1,7 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect } from "../../utils";
-require("dotenv").config();
-export default class HeatingSensor {
+import { randFutureTime, shouldUpdate, publishOnConnect, mqttLiveUrl } from "../../utils";
+
+export default class HeatingSensorBridge {
   name: string;
   temperature: number = 0;
   humidity: number = 0;
@@ -16,7 +16,7 @@ export default class HeatingSensor {
     this.client = client;
     this.topic = deviceConfig.topic;
 
-    this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
+    this.kavanestMQTT = mqtt.connect(mqttLiveUrl);
     // try {
     // } catch {
     //   this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
@@ -45,7 +45,7 @@ export default class HeatingSensor {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        type: "Sensor",
+        // type: "Sensor",
         node: `${this.name} Sensor`,
         temperature: this.temperature,
         humidity: this.humidity,
