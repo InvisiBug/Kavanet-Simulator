@@ -7,7 +7,7 @@ export default class Plug {
   topic: string;
   controlTopic: string;
 
-  state: boolean = true;
+  state = true;
   lastSent: number;
 
   constructor(client: MqttClient, deviceConfig: any) {
@@ -39,7 +39,7 @@ export default class Plug {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        type: "1/0",
+        // type: "1/0", //* Tried to make things auto detect
         node: this.name,
         state: this.state,
       }),

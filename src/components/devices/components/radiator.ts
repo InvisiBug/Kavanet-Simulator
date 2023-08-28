@@ -37,7 +37,7 @@ export default class ComputerAudio {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        type: "radiator",
+        // type: "radiator",
         node: this.topic,
         fan: this.fan,
         valve: this.valve,
