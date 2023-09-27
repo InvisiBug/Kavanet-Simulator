@@ -1,77 +1,78 @@
-heatingSensorBridges:
-  - name: livingRoom
-    physicalDeviceTopic: Living Room Sensor
-    topic: Living Room Sensor
-
-  - name: diningRoom
-    physicalDeviceTopic: Dining Room Sensor
-    topic: Dining Room Sensor
-
-  - name: frontStudy
-    physicalDeviceTopic: Front Study Sensor
-    topic: Front Study Sensor
-
-  - name: rearStudy
-    physicalDeviceTopic: Rear Study Sensor
-    topic: Rear Study Sensor
-
-  - name: frontBedroom
-    physicalDeviceTopic: Front Bedroom Sensor
-    topic: Front Bedroom Sensor
-
-  - name: rearBedroom
-    physicalDeviceTopic: Rear Bedroom Sensor
-    topic: Rear Bedroom Sensor
-
-# heatingSensors:
+# heatingSensorBridges:
 #   - name: livingRoom
+#     physicalDeviceTopic: Living Room Sensor
 #     topic: Living Room Sensor
-#     startingTemp: 16
-#     fluctuation: true
 
 #   - name: diningRoom
+#     physicalDeviceTopic: Dining Room Sensor
 #     topic: Dining Room Sensor
-#     startingTemp: 16
-#     fluctuation: true
 
 #   - name: frontStudy
+#     physicalDeviceTopic: Front Study Sensor
 #     topic: Front Study Sensor
-#     startingTemp: 16
-#     fluctuation: true
 
 #   - name: rearStudy
+#     physicalDeviceTopic: Rear Study Sensor
 #     topic: Rear Study Sensor
-#     startingTemp: 16
-#     fluctuation: true
 
 #   - name: frontBedroom
+#     physicalDeviceTopic: Front Bedroom Sensor
 #     topic: Front Bedroom Sensor
-#     startingTemp: 16
-#     fluctuation: true
 
 #   - name: rearBedroom
+#     physicalDeviceTopic: Rear Bedroom Sensor
 #     topic: Rear Bedroom Sensor
-#     startingTemp: 16
-#     fluctuation: true
+
+heatingSensors:
+  - name: livingRoom
+    topic: Living Room Sensor
+    startingTemp: 16
+    fluctuation: true
+
+  - name: trainingRoom
+    topic: Training Room Sensor
+    startingTemp: 16
+    fluctuation: true
+
+  - name: study
+    topic: Study Sensor
+    startingTemp: 16
+    fluctuation: true
+
+  - name: printerRoom
+    topic: Printer Room Sensor
+    startingTemp: 16
+    fluctuation: true
+
+  - name: bedroom
+    topic: Bedroom Sensor
+    startingTemp: 16
+    fluctuation: true
 
 valves:
-  - name: diningRoom
-    topic: Dining Room Valve
-    controlTopic: Dining Room Valve Control
+  - name: livingRoom
+    topic: Living Room Valve
+    controlTopic: Living Room Valve Control
 
-  - name: rearStudy
-    topic: Rear Study Valve
-    controlTopic: Rear Study Valve Control
+  - name: trainingRoom
+    topic: Training Room Valve
+    controlTopic: Training Room Valve Control
 
-  - name: frontBedroom
-    topic: Front Bedroom Valve
-    controlTopic: Front Bedroom Valve Control
+  - name: printerRoom
+    topic: Printer Room Valve
+    controlTopic: Printer Room Valve Control
 
-  - name: rearBedroom
-    topic: Rear Bedroom Valve
-    controlTopic: Rear Bedroom Valve Control
 
-# radiators:
+radiators:
+  - name: study
+    topic: Study Radiator
+    controlTopic: Study Radiator Control
+
+  - name: bedRoom
+    topic: Bed Room Radiator
+    controlTopic: Bed Room Radiator Control
+
+# radiatorTemperatureBridges:
 #   - name: livingRoom
 #     topic: Living Room Radiator
 #     controlTopic: Living Room Radiator Control
@@ -79,15 +80,6 @@ valves:
 #   - name: frontStudy
 #     topic: Front Study Radiator
 #     controlTopic: Front Study Radiator Control
-
-radiatorTemperatureBridges:
-  - name: livingRoom
-    topic: Living Room Radiator
-    controlTopic: Living Room Radiator Control
-
-  - name: frontStudy
-    topic: Front Study Radiator
-    controlTopic: Front Study Radiator Control
 
 plugs:
   - name: sun
@@ -119,20 +111,20 @@ plugs:
     topic: Computer Power
 
 rgbLights:
-- name: deskLEDs
-  topic: Desk LEDs
-  controlTopic: Desk LED Control
-  multiMode: false
+  - name: deskLEDs
+    topic: Desk LEDs
+    controlTopic: Desk LED Control
+    multiMode: false
 
-- name: tableLamp
-  topic: Table Lamp
-  controlTopic: Table Lamp Control
-  multiMode: true
+  - name: tableLamp
+    topic: Table Lamp
+    controlTopic: Table Lamp Control
+    multiMode: true
 
-- name: screenLEDs
-  topic: Screen LEDs
-  controlTopic: Screen LEDs Control
-  multiMode: true
+  - name: screenLEDs
+    topic: Screen LEDs
+    controlTopic: Screen LEDs Control
+    multiMode: true
 
 specials:
   - name: computerAudio

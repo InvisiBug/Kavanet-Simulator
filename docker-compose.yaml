@@ -1,18 +1,21 @@
+#* This file brings up the simulator, the MQTT broker and the mongo database
 version: "3.1"
 
 services:
-  # simulator:
-  #   container_name: kavanest-simulator
-  #   image: kavanest-simulator
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - proxynet
-  #   environment:
-  #     - ENVIRONMENT=docker
-  #     - MQTT_LIVE=mqtt://kavanet.io # For the sensor bridge connection
-  #     - MQTT_DOCKER=mqtt://mosquitto
+  #* Comment out the simulator section below if you are dev'ing against
+  #* the dockerised version of KavaNest
+  simulator:
+    container_name: kavanest-simulator
+    image: kavanest-simulator
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - proxynet
+    environment:
+      - ENVIRONMENT=docker
+      - MQTT_LIVE=mqtt://kavanet.io # For the sensor bridge connection
+      - MQTT=mqtt://kavanest-mqtt
 
   mosquitto:
     image: eclipse-mosquitto:1.6

@@ -24,7 +24,7 @@ export const publishOnConnect = () => {
   return false;
 };
 
-export { mqttUrl } from "./mqttUrlGenerator";
+export { mqttUrl, mqttLiveUrl } from "./mqttUrlGenerator";
 
 // import * as dotenv from "dotenv";
 // import dotenvExpand from "dotenv-expand";

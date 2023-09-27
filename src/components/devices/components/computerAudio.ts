@@ -49,7 +49,7 @@ export default class ComputerAudio {
     this.client.publish(
       `${this.nodeName}`,
       JSON.stringify({
-        type: "special",
+        // type: "special",
         Node: this.nodeName,
         Left: this.left,
         Right: this.right,
