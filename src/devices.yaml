@@ -54,6 +54,10 @@ valves:
     topic: Living Room Valve
     controlTopic: Living Room Valve Control
 
+  - name: bedRoom
+    topic: Bedroom Valve
+    controlTopic: Bedroom Valve Control
+
   - name: trainingRoom
     topic: Training Room Valve
     controlTopic: Training Room Valve Control
@@ -68,9 +72,11 @@ radiators:
     topic: Study Radiator
     controlTopic: Study Radiator Control
 
-  - name: bedRoom
-    topic: Bed Room Radiator
-    controlTopic: Bed Room Radiator Control
+  - name: livingRoom
+    topic: Living Room Radiator
+    controlTopic: Living Room Radiator Control
+
+
 
 # radiatorTemperatureBridges:
 #   - name: livingRoom
