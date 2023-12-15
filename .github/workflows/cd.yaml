@@ -50,8 +50,3 @@ jobs:
           git add ./values/test.yaml
           git commit -m "Update values.yaml"
           git push
-
-      - name: Update dev branch
-        run: |
-          git checkout dev
-          git merge test
