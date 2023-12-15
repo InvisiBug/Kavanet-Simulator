@@ -1,10 +1,12 @@
 name: kavanest-test-simulator
 
 namespace: kavanest-test
+env:
+  APP_VERSION: 349874015a432c6de64aa615f19f19f9b33ee70f
 
 deployment:
   - name: kavanest-test-simulator
-    image: 192.168.1.61:5000/kavanest-simulator:test
+    image: invisibug/kavanest-simulator:test
     ports:
     - port: 1883
     - port: 9001

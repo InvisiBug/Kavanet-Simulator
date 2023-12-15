@@ -14,7 +14,8 @@
     "deploy--test": "./bin/deploy--test.sh",
     "up": "clear && ./bin/start-container.sh",
     "down": "docker-compose down",
-    "logs": "docker logs simulator -f"
+    "logs": "docker logs simulator -f",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
