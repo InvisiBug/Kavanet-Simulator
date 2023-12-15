@@ -12,7 +12,7 @@ env:
   DOCKER_DEFAULT_PLATFORM: linux/amd64
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -51,7 +51,9 @@ jobs:
           git commit -m "Update values.yaml"
           git push
 
+
   sync-branch:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
