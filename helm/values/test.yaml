@@ -6,7 +6,7 @@ env:
 
 deployment:
   - name: kavanest-test-simulator
-    image: invisibug/kavanest-simulator:test
+    image: invisibug/kavanest-simulator
     ports:
     - port: 1883
     - port: 9001
