@@ -62,7 +62,7 @@ jobs:
           type: now
           from_branch: test-release
           target_branch: test
-          # github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
 
 
   # update-cms-master:
