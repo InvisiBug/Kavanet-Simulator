@@ -8,7 +8,8 @@
 .pnp.js
 /dist
 
-./helm/charts
+/helm/charts
+**/charts/*.tgz
 
 # testing
 /coverage
