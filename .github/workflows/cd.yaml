@@ -50,3 +50,5 @@ jobs:
           git add ./values/test.yaml
           git commit -m "Update values.yaml"
           git push
+          git checkout test
+          git merge dev

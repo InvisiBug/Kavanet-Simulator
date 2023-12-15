@@ -12,6 +12,7 @@ import { mqttUrl } from "./components/utils";
 let client: mqtt.MqttClient;
 console.log(mqttUrl);
 client = mqtt.connect(mqttUrl);
+console.log("kasjdhaslkjdhaslkjdh");
 
 client.subscribe("#", (err) => {
   err
