@@ -1,4 +1,4 @@
-name: CD
+name: Test pipeline
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_KEY: ${{ secrets.DOCKERHUB_KEY }}
-  IMAGE_NAME: kavanest-test-simulator
+  IMAGE_NAME: kavanest-simulator
   DOCKER_DEFAULT_PLATFORM: linux/amd64
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-  tag-branch:
+  update-app-version:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
@@ -52,9 +52,8 @@ jobs:
         git commit -m "Update values.yaml"
         git push
 
-
-  sync-test:
-    needs: tag-branch
+  deploy-to-test:
+    needs: update-app-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -63,13 +62,13 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          message: fast-forward test
+          message: Deploy to test
           from_branch: test-release
           target_branch: test
           github_token: ${{ secrets.ACCESS_TOKEN }}
 
   sync-dev:
-    needs: sync-test
+    needs: deploy-to-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -82,18 +81,3 @@ jobs:
           message: fast-forward dev
           target_branch: dev
           github_token: ${{ secrets.ACCESS_TOKEN }}
-
-
-  # update-cms-master:
-  #   name: Merge test-release into release after a PR is merged
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@v2
-  #     - name: merge
-  #       uses: mtanzi/action-automerge@v1
-  #       id: merge
-  #       with:
-  #         github_token: ${{ github.token }}
-  #         source: 'test-release'
-  #         target: 'test'
