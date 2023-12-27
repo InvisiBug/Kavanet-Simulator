@@ -1,6 +1,8 @@
 #!/bin/sh
 
-REGISTRY_IP=192.168.1.61:5000
+# REGISTRY_IP=192.168.1.61:5000
+# Now using docker hub istead of private registry
+REGISTRY_IP=invisibug
 APP_NAME=kavanest-simulator:test
 
 yarn install && \
