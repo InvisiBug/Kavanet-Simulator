@@ -23,30 +23,51 @@
 #     physicalDeviceTopic: Rear Bedroom Sensor
 #     topic: Rear Bedroom Sensor
 
-heatingSensors:
+# heatingSensors:
+#   - name: livingRoom
+#     topic: Living Room Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: trainingRoom
+#     topic: Training Room Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: study
+#     topic: Study Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: printerRoom
+#     topic: Printer Room Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+#   - name: bedroom
+#     topic: Bedroom Sensor
+#     startingTemp: 16
+#     fluctuation: true
+
+zigbeeSensors:
   - name: livingRoom
-    topic: Living Room Sensor
-    startingTemp: 16
+    topic: livingRoomSensor
     fluctuation: true
 
   - name: trainingRoom
-    topic: Training Room Sensor
-    startingTemp: 16
+    topic: trainingRoomSensor
     fluctuation: true
 
   - name: study
-    topic: Study Sensor
-    startingTemp: 16
+    topic: studySensor
     fluctuation: true
 
   - name: printerRoom
-    topic: Printer Room Sensor
-    startingTemp: 16
+    topic: printerRoomSensor
     fluctuation: true
 
   - name: bedroom
-    topic: Bedroom Sensor
-    startingTemp: 16
+    topic: bedroomSensor
     fluctuation: true
 
 valves:
@@ -82,13 +103,13 @@ radiators:
 #     controlTopic: Front Study Radiator Control
 
 plugs:
-  - name: sun
-    controlTopic: Sun Control
-    topic: Sun
+  - name: bedroomLamp
+    controlTopic: Bedroom Lamp Control
+    topic: Bedroom lamp
 
-  - name: lamp
-    controlTopic: Lamp Control
-    topic: Lamp
+  - name: studyLamp
+    controlTopic: Study Lamp Control
+    topic: Study Lamp
 
   - name: floodLight
     controlTopic: Floodlight Control
@@ -110,6 +131,15 @@ plugs:
     controlTopic: Computer Power Control
     topic: Computer Power
 
+zigbeePlugs:
+  - name: eggChair
+    controlTopic: zigbee2mqtt/eggChair/set
+    topic: zigbee2mqtt/eggChair
+
+  - name: livingRoomLamp
+    controlTopic: zigbee2mqtt/livingRoomLamp/set
+    topic: zigbee2mqtt/livingRoomLamp
+
 rgbLights:
   - name: deskLEDs
     topic: Desk LEDs
@@ -124,6 +154,11 @@ rgbLights:
   - name: screenLEDs
     topic: Screen LEDs
     controlTopic: Screen LEDs Control
+    multiMode: true
+
+  - name: hexagonLights
+    topic: Hexagon Lights
+    controlTopic: Hexagon Lights Control
     multiMode: true
 
 specials:

@@ -1,5 +1,5 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect, mqttLiveUrl } from "../../utils";
+import { randFutureTime, shouldUpdate, publishOnConnect, mqttLiveUrl } from "../../../utils";
 
 export default class HeatingSensorBridge {
   name: string;

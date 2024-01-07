@@ -1,5 +1,5 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../utils";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../utils";
 require("dotenv").config();
 
 export default class ComputerAudio {
