@@ -21,7 +21,7 @@ export default class Plug {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (`${topic}/set` === this.controlTopic) {
+    if (topic === this.controlTopic) {
       const payload: ControlPayload = JSON.parse(rawPayload.toString());
 
       // `{"state":${state ? JSON.stringify("on") : JSON.stringify("off")}}`
