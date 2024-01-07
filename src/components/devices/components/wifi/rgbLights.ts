@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../utils";
+import { randFutureTime, publishOnConnect, shouldUpdate, randBetween } from "../../../utils";
 
 export default class RBGLight {
   client: MqttClient;

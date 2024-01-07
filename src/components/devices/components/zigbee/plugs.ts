@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../utils";
+import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../utils";
 
 export default class Plug {
   client: MqttClient;
@@ -7,7 +7,7 @@ export default class Plug {
   topic: string;
   controlTopic: string;
 
-  state = true;
+  state = "ON";
   lastSent: number;
 
   constructor(client: MqttClient, deviceConfig: any) {
@@ -21,13 +21,15 @@ export default class Plug {
   }
 
   handleIncoming(topic: String, rawPayload: Object) {
-    if (topic === this.controlTopic) {
-      const payload = JSON.parse(rawPayload.toString());
+    if (`${topic}/set` === this.controlTopic) {
+      const payload: ControlPayload = JSON.parse(rawPayload.toString());
 
-      if (payload === 1) {
-        this.state = true;
-      } else if (payload === 0) {
-        this.state = false;
+      // `{"state":${state ? JSON.stringify("on") : JSON.stringify("off")}}`
+
+      if (payload.state === "on") {
+        this.state = "ON";
+      } else if (payload.state === "off") {
+        this.state = "OFF";
       } else {
         console.error("invalid message");
       }
@@ -39,10 +41,14 @@ export default class Plug {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        // type: "1/0", //* Tried to make things auto detect
-        node: this.name,
+        current: 0.01,
+        energy: 0.01,
+        linkquality: 87,
+        power: 2,
+        power_on_behavior: "previous",
         state: this.state,
-      }),
+        voltage: 238,
+      } as Payload),
     );
   }
 
@@ -54,3 +60,17 @@ export default class Plug {
     }
   }
 }
+
+type Payload = {
+  current: number;
+  energy: number;
+  linkquality: number;
+  power: number;
+  power_on_behavior: "previous" | "on" | "off";
+  state: "ON" | "OFF";
+  voltage: number;
+};
+
+type ControlPayload = {
+  state: "on" | "off";
+};

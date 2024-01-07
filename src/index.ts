@@ -20,8 +20,8 @@ client.subscribe("#", (err) => {
     : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
 });
 
-client.on("message", (_, payload) => {
-  console.log(chalk.yellow(payload.toString()));
+client.on("message", (topic, payload) => {
+  console.log(topic.toString(), chalk.yellow(payload.toString()));
 });
 
 client.on("connect", () => console.log("Simulator connected to", mqttUrl));
