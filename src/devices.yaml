@@ -67,7 +67,7 @@ zigbeeSensors:
     fluctuation: true
 
   - name: bedroom
-    topic: bedroomSensor
+    topic: bedRoomSensor
     fluctuation: true
 
 valves:
