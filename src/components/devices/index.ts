@@ -15,3 +15,4 @@ export { default as RadiatorTemperatureBridge } from "./components/wifi/radiator
  */
 export { default as ZigbeePlugs } from "./components/zigbee/plugs";
 export { default as ZigbeeSensor } from "./components/zigbee/sensor";
+export { default as ZigbeeSensorBridge } from "./components/zigbee/sensorBridge";

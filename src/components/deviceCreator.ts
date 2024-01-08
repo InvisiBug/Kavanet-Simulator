@@ -11,6 +11,7 @@ import {
   RadiatorTemperatureBridge,
   ZigbeeSensor,
   ZigbeePlugs,
+  ZigbeeSensorBridge,
 } from "./devices/index";
 
 export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
@@ -41,6 +42,9 @@ export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
 
     case "zigbeePlugs":
       return new ZigbeePlugs(client, deviceConfig);
+
+    case "zigbeeSensorBridges":
+      return new ZigbeeSensorBridge(client, deviceConfig);
 
     case "specials":
       if (deviceConfig.name === "computerAudio") return new ComputerAudio(client);

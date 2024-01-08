@@ -1,79 +1,45 @@
-# heatingSensorBridges:
+# zigbeeSensors:
 #   - name: livingRoom
-#     physicalDeviceTopic: Living Room Sensor
-#     topic: Living Room Sensor
-
-#   - name: diningRoom
-#     physicalDeviceTopic: Dining Room Sensor
-#     topic: Dining Room Sensor
-
-#   - name: frontStudy
-#     physicalDeviceTopic: Front Study Sensor
-#     topic: Front Study Sensor
-
-#   - name: rearStudy
-#     physicalDeviceTopic: Rear Study Sensor
-#     topic: Rear Study Sensor
-
-#   - name: frontBedroom
-#     physicalDeviceTopic: Front Bedroom Sensor
-#     topic: Front Bedroom Sensor
-
-#   - name: rearBedroom
-#     physicalDeviceTopic: Rear Bedroom Sensor
-#     topic: Rear Bedroom Sensor
-
-# heatingSensors:
-#   - name: livingRoom
-#     topic: Living Room Sensor
-#     startingTemp: 16
+#     topic: livingRoomSensor
 #     fluctuation: true
 
 #   - name: trainingRoom
-#     topic: Training Room Sensor
-#     startingTemp: 16
+#     topic: trainingRoomSensor
 #     fluctuation: true
 
 #   - name: study
-#     topic: Study Sensor
-#     startingTemp: 16
+#     topic: studySensor
 #     fluctuation: true
 
 #   - name: printerRoom
-#     topic: Printer Room Sensor
-#     startingTemp: 16
+#     topic: printerRoomSensor
 #     fluctuation: true
 
-#   - name: bedroom
-#     topic: Bedroom Sensor
-#     startingTemp: 16
+#   - name: bedRoom
+#     topic: bedRoomSensor
 #     fluctuation: true
 
-zigbeeSensors:
+zigbeeSensorBridges:
   - name: livingRoom
-    topic: livingRoomSensor
-    fluctuation: true
+    topic: zigbee2mqtt/livingRoomSensor
 
   - name: trainingRoom
-    topic: trainingRoomSensor
-    fluctuation: true
+    topic: zigbee2mqtt/trainingRoomSensor
 
   - name: study
-    topic: studySensor
-    fluctuation: true
+    topic: zigbee2mqtt/studySensor
 
   - name: printerRoom
-    topic: printerRoomSensor
-    fluctuation: true
+    topic: zigbee2mqtt/printerRoomSensor
 
   - name: bedRoom
-    topic: bedRoomSensor
-    fluctuation: true
+    topic: zigbee2mqtt/bedRoomSensor
+
 
 valves:
-  - name: livingRoom
-    topic: Living Room Valve
-    controlTopic: Living Room Valve Control
+  - name: bedRoom
+    topic: Bedroom Valve
+    controlTopic: Bed Room Valve Control
 
   - name: trainingRoom
     topic: Training Room Valve
@@ -89,18 +55,19 @@ radiators:
     topic: Study Radiator
     controlTopic: Study Radiator Control
 
-  - name: bedRoom
-    topic: Bed Room Radiator
-    controlTopic: Bed Room Radiator Control
+  - name: livingRoom
+    topic: Living Room Radiator
+    controlTopic: Living Room Radiator Control
+
 
 # radiatorTemperatureBridges:
 #   - name: livingRoom
 #     topic: Living Room Radiator
 #     controlTopic: Living Room Radiator Control
 
-#   - name: frontStudy
-#     topic: Front Study Radiator
-#     controlTopic: Front Study Radiator Control
+#   - name: study
+#     topic: Study Radiator
+#     controlTopic: Study Radiator Control
 
 plugs:
   - name: bedroomLamp
@@ -127,9 +94,9 @@ plugs:
     controlTopic: Heating Control
     topic: Heating
 
-  - name: computerPower
-    controlTopic: Computer Power Control
-    topic: Computer Power
+  # - name: computerPower
+  #   controlTopic: Computer Power Control
+  #   topic: Computer Power
 
 zigbeePlugs:
   - name: eggChair
