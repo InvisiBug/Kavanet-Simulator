@@ -24,7 +24,7 @@ export default class ComputerAudio {
   handleIncoming(topic: String, rawPayload: Object) {
     if (topic === this.controlTopic) {
       const payload = JSON.parse(rawPayload.toString());
-      console.log(payload);
+      // console.log(payload);
 
       this.fan = payload.fan ? 1 : 0;
       this.valve = payload.valve ? 1 : 0;
