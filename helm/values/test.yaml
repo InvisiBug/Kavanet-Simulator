@@ -2,7 +2,7 @@ name: kavanest-test-simulator
 
 namespace: kavanest-test
 env:
-  APP_VERSION: 39599f282195e286b00b657f175dc5176dc133cd
+  APP_VERSION: e662ce52fce8de0fe8f3d2e670199e15a07ab500
 
 deployment:
   - name: kavanest-test-simulator
