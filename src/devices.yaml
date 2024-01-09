@@ -38,7 +38,7 @@ zigbeeSensorBridges:
 
 valves:
   - name: bedRoom
-    topic: Bedroom Valve
+    topic: Bed Room Valve
     controlTopic: Bed Room Valve Control
 
   - name: trainingRoom
