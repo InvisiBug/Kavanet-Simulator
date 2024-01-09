@@ -15,4 +15,4 @@ deployment:
         value: mqtt://kavanest-test-mqtt
 
       - name: MQTT_LIVE
-        value: mqtt://192.168.1.46
+        value: mqtt://mqtt.kavanet.io
