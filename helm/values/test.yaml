@@ -2,7 +2,7 @@ name: kavanest-test-simulator
 
 namespace: kavanest-test
 env:
-  APP_VERSION: dbeec593cb13cd67fab3ce0ac9a9707cd8bc414b
+  APP_VERSION: ce65db5dd4e191a5e7b44e2dcabb22e8d7a2d94e
 
 deployment:
   - name: kavanest-test-simulator
@@ -15,4 +15,4 @@ deployment:
         value: mqtt://kavanest-test-mqtt
 
       - name: MQTT_LIVE
-        value: mqtt://192.168.1.46
+        value: mqtt://mqtt.kavanet.io
