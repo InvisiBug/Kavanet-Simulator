@@ -107,6 +107,10 @@ zigbeePlugs:
     controlTopic: zigbee2mqtt/livingRoomLamp/set
     topic: zigbee2mqtt/livingRoomLamp
 
+  - name: BedRoomLamp
+    controlTopic: zigbee2mqtt/BedRoomLamp/set
+    topic: zigbee2mqtt/BedRoomLamp
+
 rgbLights:
   - name: deskLEDs
     topic: Desk LEDs
