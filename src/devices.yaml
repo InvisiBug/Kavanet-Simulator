@@ -69,6 +69,8 @@ radiators:
 #     topic: Study Radiator
 #     controlTopic: Study Radiator Control
 
+# need more
+
 plugs:
   - name: bedroomLamp
     controlTopic: Bedroom Lamp Control
