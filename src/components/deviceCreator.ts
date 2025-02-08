@@ -4,14 +4,14 @@ import {
   ComputerAudio,
   Plugs,
   Valves,
-  HeatingSensors,
   RBGLights,
-  HeatingSensorBridges,
   Radiator,
-  RadiatorTemperatureBridge,
   ZigbeeSensor,
   ZigbeePlugs,
   ZigbeeSensorBridge,
+  ZigbeeBulbs,
+  ZigbeeRGBStrips,
+  RadiatorBridge,
 } from "./devices/index";
 
 export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
@@ -22,20 +22,14 @@ export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
     case "valves":
       return new Valves(client, deviceConfig);
 
-    case "heatingSensors":
-      return new HeatingSensors(client, deviceConfig);
-
-    case "heatingSensorBridges":
-      return new HeatingSensorBridges(client, deviceConfig);
-
     case "rgbLights":
       return new RBGLights(client, deviceConfig);
 
     case "radiators":
       return new Radiator(client, deviceConfig);
 
-    case "radiatorTemperatureBridges":
-      return new RadiatorTemperatureBridge(client, deviceConfig);
+    case "radiatorBridges":
+      return new RadiatorBridge(client, deviceConfig);
 
     case "zigbeeSensors":
       return new ZigbeeSensor(client, deviceConfig);
@@ -43,10 +37,19 @@ export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
     case "zigbeePlugs":
       return new ZigbeePlugs(client, deviceConfig);
 
+    case "zigbeeBulbs":
+      return new ZigbeeBulbs(client, deviceConfig);
+
     case "zigbeeSensorBridges":
       return new ZigbeeSensorBridge(client, deviceConfig);
 
+    case "zigbeeRGBStrips":
+      return new ZigbeeRGBStrips(client, deviceConfig);
+
     case "specials":
       if (deviceConfig.name === "computerAudio") return new ComputerAudio(client);
+
+    default:
+      console.error("Device not found: ", deviceType);
   }
 };

@@ -1,8 +1,8 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../utils";
+import { randFutureTime, publishOnConnect, shouldUpdate, mqttLiveUrl } from "../../../utils";
 require("dotenv").config();
 
-export default class ComputerAudio {
+export default class RadiatorBridge {
   client: MqttClient;
   lastSent: number;
   topic: string;
@@ -19,24 +19,25 @@ export default class ComputerAudio {
     this.name = deviceConfig.name;
     this.topic = deviceConfig.topic;
     this.controlTopic = deviceConfig.controlTopic;
-    console.log(this.topic);
 
     this.client = client;
     this.lastSent = randFutureTime();
     publishOnConnect() ? this.publish() : null;
 
-    this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
+    this.kavanestMQTT = mqtt.connect(mqttLiveUrl);
 
     this.kavanestMQTT.subscribe(deviceConfig.topic, (err) => {
       err ? console.log(err) : null;
     });
 
-    this.kavanestMQTT.on("connect", () => console.log(`${this.name} sensor relay connected to mqtt.kavanet.io`));
+    this.kavanestMQTT.on("connect", () => console.log(`${this.name} radiator relay connected to mqtt.kavanet.io`));
 
     this.kavanestMQTT.on("message", (_, rawPayload) => {
       try {
         const payload = JSON.parse(rawPayload.toString());
         this.inlet = payload.inlet;
+        this.valve = payload.valve;
+        this.fan = payload.fan;
 
         this.publish();
       } catch (err) {

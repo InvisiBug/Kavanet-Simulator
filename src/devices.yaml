@@ -29,8 +29,8 @@ zigbeeSensorBridges:
   - name: study
     topic: zigbee2mqtt/studySensor
 
-  - name: printerRoom
-    topic: zigbee2mqtt/printerRoomSensor
+  # - name: printerRoom
+  #   topic: zigbee2mqtt/printerRoomSensor
 
   - name: bedRoom
     topic: zigbee2mqtt/bedRoomSensor
@@ -45,29 +45,29 @@ valves:
     topic: Training Room Valve
     controlTopic: Training Room Valve Control
 
-  - name: printerRoom
-    topic: Printer Room Valve
-    controlTopic: Printer Room Valve Control
+  # - name: printerRoom
+  #   topic: Printer Room Valve
+  #   controlTopic: Printer Room Valve Control
 
 
-radiators:
-  - name: study
-    topic: Study Radiator
-    controlTopic: Study Radiator Control
+# radiators:
+#   - name: study
+#     topic: Study Radiator
+#     controlTopic: Study Radiator Control
 
-  - name: livingRoom
-    topic: Living Room Radiator
-    controlTopic: Living Room Radiator Control
-
-
-# radiatorTemperatureBridges:
 #   - name: livingRoom
 #     topic: Living Room Radiator
 #     controlTopic: Living Room Radiator Control
 
-#   - name: study
-#     topic: Study Radiator
-#     controlTopic: Study Radiator Control
+
+radiatorBridges:
+  - name: livingRoom
+    topic: Living Room Radiator
+    controlTopic: Living Room Radiator Control
+
+  - name: study
+    topic: Study Radiator
+    controlTopic: Study Radiator Control
 
 # need more
 
@@ -88,10 +88,6 @@ plugs:
     controlTopic: Mattress Control
     topic: Mattress
 
-  - name: radiatorFan
-    controlTopic: Radiator Fan Control
-    topic: Radiator Fan
-
   - name: heating
     controlTopic: Heating Control
     topic: Heating
@@ -110,8 +106,26 @@ zigbeePlugs:
     topic: zigbee2mqtt/livingRoomLamp
 
   - name: BedRoomLamp
-    controlTopic: zigbee2mqtt/BedRoomLamp/set
-    topic: zigbee2mqtt/BedRoomLamp
+    controlTopic: zigbee2mqtt/bedRoomLamp/set
+    topic: zigbee2mqtt/bedRoomLamp
+
+  - name: KitchenLamp
+    controlTopic: zigbee2mqtt/kitchenLamp/set
+    topic: zigbee2mqtt/kitchenLamp
+
+zigbeeBulbs:
+  - name: LandingLight
+    controlTopic: zigbee2mqtt/landingLight/set
+    topic: zigbee2mqtt/landingLight
+
+  - name: PrinterRoomLight
+    controlTopic: zigbee2mqtt/printerRoomLight/set
+    topic: zigbee2mqtt/printerRoomLight
+
+zigbeeRGBStrips:
+  - name: KitchenStrip
+    topic: zigbee2mqtt/kitchenStrip
+    room: kitchen
 
 rgbLights:
   - name: deskLEDs
@@ -127,11 +141,6 @@ rgbLights:
   - name: screenLEDs
     topic: Screen LEDs
     controlTopic: Screen LEDs Control
-    multiMode: true
-
-  - name: hexagonLights
-    topic: Hexagon Lights
-    controlTopic: Hexagon Lights Control
     multiMode: true
 
 specials:
