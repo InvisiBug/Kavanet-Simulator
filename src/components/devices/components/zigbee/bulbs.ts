@@ -1,17 +1,17 @@
 import { MqttClient } from "mqtt";
 import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../utils";
 
-export default class Radiator {
+export default class Bulb {
   client: MqttClient;
-  lastSent: number;
+  name: string;
   topic: string;
   controlTopic: string;
 
-  fan: number = 1;
-  valve: number = 1;
-  inlet: number = 25;
+  state = "ON";
+  lastSent: number;
 
   constructor(client: MqttClient, deviceConfig: any) {
+    this.name = deviceConfig.name;
     this.topic = deviceConfig.topic;
     this.controlTopic = deviceConfig.controlTopic;
 
@@ -22,12 +22,17 @@ export default class Radiator {
 
   handleIncoming(topic: String, rawPayload: Object) {
     if (topic === this.controlTopic) {
-      const payload = JSON.parse(rawPayload.toString());
-      // console.log(payload);
+      const payload: ControlPayload = JSON.parse(rawPayload.toString());
 
-      this.fan = payload.fan ? 1 : 0;
-      this.valve = payload.valve ? 1 : 0;
+      // `{"state":${state ? JSON.stringify("on") : JSON.stringify("off")}}`
 
+      if (payload.state === "on") {
+        this.state = "ON";
+      } else if (payload.state === "off") {
+        this.state = "OFF";
+      } else {
+        console.error("invalid message");
+      }
       this.publish();
     }
   }
@@ -36,12 +41,10 @@ export default class Radiator {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        // type: "radiator",
-        node: this.topic,
-        fan: this.fan,
-        valve: this.valve,
-        inlet: this.inlet,
-      }),
+        power_on_behavior: "previous",
+        state: this.state,
+        voltage: 238,
+      } as Payload),
     );
   }
 
@@ -53,3 +56,13 @@ export default class Radiator {
     }
   }
 }
+
+type Payload = {
+  power_on_behavior: "previous" | "on" | "off";
+  state: "ON" | "OFF";
+  voltage: number;
+};
+
+type ControlPayload = {
+  state: "on" | "off";
+};

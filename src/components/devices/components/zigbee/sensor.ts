@@ -1,5 +1,6 @@
 import { MqttClient } from "mqtt";
 import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../utils";
+import { DeviceConfig } from "@/components/types";
 
 export default class Plug {
   client: MqttClient;
@@ -8,14 +9,7 @@ export default class Plug {
 
   lastSent: number;
 
-  constructor(
-    client: MqttClient,
-    deviceConfig: {
-      name: string;
-      topic: string;
-      controlTopic?: string;
-    },
-  ) {
+  constructor(client: MqttClient, deviceConfig: DeviceConfig) {
     this.name = deviceConfig.name;
     this.topic = deviceConfig.topic;
 

@@ -1,7 +1,7 @@
 import mqtt, { MqttClient } from "mqtt";
 import { randFutureTime, shouldUpdate, publishOnConnect, mqttLiveUrl } from "../../../utils";
 
-export default class HeatingSensorBridge {
+export default class SensorBridge {
   name: string;
   topic: string;
 
@@ -15,11 +15,6 @@ export default class HeatingSensorBridge {
     this.topic = deviceConfig.topic;
 
     this.kavanestMQTT = mqtt.connect(mqttLiveUrl);
-    // try {
-    // } catch {
-    //   this.kavanestMQTT = mqtt.connect(process.env.MQTT_LIVE ?? "");
-    //   console.log("MQTT undable to connect");
-    // }
 
     this.kavanestMQTT.subscribe(this.topic, (err) => {
       err ? console.log(err) : null;

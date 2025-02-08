@@ -20,6 +20,9 @@ client.subscribe("#", (err) => {
     : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
 });
 
+/**
+ * Log out all MQTT messages
+ */
 client.on("message", (topic, payload) => {
   console.log(topic.toString(), chalk.yellow(payload.toString()));
 });
@@ -37,8 +40,6 @@ for (let deviceType in deviceConfig) {
     devices.push(DeviceCreator(client, node, deviceType));
   });
 }
-
-// devices.push(new RadiatorMonitorBridge(client));
 
 setInterval(() => {
   try {

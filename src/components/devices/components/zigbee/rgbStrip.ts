@@ -1,13 +1,13 @@
 import { MqttClient } from "mqtt";
 import { randFutureTime, publishOnConnect, shouldUpdate } from "../../../utils";
 
-export default class Valve {
+export default class RBGStrip {
   client: MqttClient;
   name: string;
   topic: string;
   controlTopic: string;
 
-  state: boolean = true;
+  state = "ON";
   lastSent: number;
 
   constructor(client: MqttClient, deviceConfig: any) {
@@ -22,13 +22,14 @@ export default class Valve {
 
   handleIncoming(topic: String, rawPayload: Object) {
     if (topic === this.controlTopic) {
-      const payload = JSON.parse(rawPayload.toString());
-      // console.log(payload);
+      const payload: ControlPayload = JSON.parse(rawPayload.toString());
 
-      if (payload === 1) {
-        this.state = true;
-      } else if (payload === 0) {
-        this.state = false;
+      // `{"state":${state ? JSON.stringify("on") : JSON.stringify("off")}}`
+
+      if (payload.state === "on") {
+        this.state = "ON";
+      } else if (payload.state === "off") {
+        this.state = "OFF";
       } else {
         console.error("invalid message");
       }
@@ -40,10 +41,14 @@ export default class Valve {
     this.client.publish(
       this.topic,
       JSON.stringify({
-        // type: "valve",
-        node: `${this.name} radiator valve`,
+        // current: 0.01,
+        // energy: 0.01,
+        // linkquality: 87,
+        // power: 2,
+        power_on_behavior: "previous",
         state: this.state,
-      }),
+        voltage: 238,
+      } as Payload),
     );
   }
 
@@ -55,3 +60,17 @@ export default class Valve {
     }
   }
 }
+
+type Payload = {
+  current: number;
+  energy: number;
+  linkquality: number;
+  power: number;
+  power_on_behavior: "previous" | "on" | "off";
+  state: "ON" | "OFF";
+  voltage: number;
+};
+
+type ControlPayload = {
+  state: "on" | "off";
+};
