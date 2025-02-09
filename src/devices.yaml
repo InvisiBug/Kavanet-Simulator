@@ -36,6 +36,17 @@ zigbeeSensorBridges:
     topic: zigbee2mqtt/bedRoomSensor
 
 
+zigbeeMotionBridges:
+  - name: trainingRoom
+    topic: zigbee2mqtt/trainingRoomMotion
+
+  - name: printerRoom
+    topic: zigbee2mqtt/printerRoomMotion
+
+  - name: landing
+    topic: zigbee2mqtt/landingMotion
+
+
 valves:
   - name: bedRoom
     topic: Bed Room Valve
