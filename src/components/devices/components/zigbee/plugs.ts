@@ -22,17 +22,9 @@ export default class Plug {
 
   handleIncoming(topic: String, rawPayload: Object) {
     if (topic === this.controlTopic) {
-      const payload: ControlPayload = JSON.parse(rawPayload.toString());
+      const { state }: ControlPayload = JSON.parse(rawPayload.toString());
 
-      // `{"state":${state ? JSON.stringify("on") : JSON.stringify("off")}}`
-
-      if (payload.state === "on") {
-        this.state = "ON";
-      } else if (payload.state === "off") {
-        this.state = "OFF";
-      } else {
-        console.error("invalid message");
-      }
+      this.state = state;
       this.publish();
     }
   }

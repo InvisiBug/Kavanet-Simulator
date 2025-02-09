@@ -12,6 +12,7 @@ import {
   ZigbeeBulbs,
   ZigbeeRGBStrips,
   RadiatorBridge,
+  ZigbeeMotionBridge,
 } from "./devices/index";
 
 export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
@@ -42,6 +43,9 @@ export default (client: MqttClient, deviceConfig: any, deviceType: any) => {
 
     case "zigbeeSensorBridges":
       return new ZigbeeSensorBridge(client, deviceConfig);
+
+    case "zigbeeMotionBridges":
+      return new ZigbeeMotionBridge(client, deviceConfig);
 
     case "zigbeeRGBStrips":
       return new ZigbeeRGBStrips(client, deviceConfig);

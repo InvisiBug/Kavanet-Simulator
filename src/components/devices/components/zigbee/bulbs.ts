@@ -24,15 +24,19 @@ export default class Bulb {
     if (topic === this.controlTopic) {
       const payload: ControlPayload = JSON.parse(rawPayload.toString());
 
+      console.log(payload);
+
       // `{"state":${state ? JSON.stringify("on") : JSON.stringify("off")}}`
 
-      if (payload.state === "on") {
-        this.state = "ON";
-      } else if (payload.state === "off") {
-        this.state = "OFF";
-      } else {
-        console.error("invalid message");
-      }
+      // if (payload.state === "ON") {
+      //   this.state = "ON";
+      // } else if (payload.state === "off") {
+      //   this.state = "OFF";
+      // } else {
+      //   console.error("invalid message");
+      // }
+
+      this.state = payload.state;
       this.publish();
     }
   }

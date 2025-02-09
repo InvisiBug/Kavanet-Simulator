@@ -14,5 +14,6 @@ export { default as RadiatorBridge } from "./components/bridges/radiatorBridge";
 export { default as ZigbeePlugs } from "./components/zigbee/plugs";
 export { default as ZigbeeSensor } from "./components/zigbee/sensor";
 export { default as ZigbeeSensorBridge } from "./components/bridges/sensorBridge";
+export { default as ZigbeeMotionBridge } from "./components/bridges/motionBridge";
 export { default as ZigbeeBulbs } from "./components/zigbee/bulbs";
 export { default as ZigbeeRGBStrips } from "./components/zigbee/rgbStrip";

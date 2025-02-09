@@ -1,7 +1,7 @@
 import mqtt, { MqttClient } from "mqtt";
-import { randFutureTime, shouldUpdate, publishOnConnect, mqttLiveUrl } from "../../../utils";
+import { mqttLiveUrl } from "../../../utils";
 
-export default class SensorBridge {
+export default class MotionBridge {
   name: string;
   topic: string;
 
@@ -20,26 +20,21 @@ export default class SensorBridge {
       err ? console.log(err) : null;
     });
 
-    this.kavanestMQTT.on("connect", () => console.log(`${this.name} sensor relay connected to mqtt.kavanet.io`));
+    this.kavanestMQTT.on("connect", () => console.log(`${this.name} motion relay connected to mqtt.kavanet.io`));
 
     this.kavanestMQTT.on("message", (_, rawPayload) => {
       try {
         const payload: any = JSON.parse(rawPayload.toString()); // Dont need to parse as this is just a relay, it gets parsed inside the scraper
+        // console.log(this.topic, payload);
         this.publish(rawPayload);
       } catch (err) {
-        console.log(`${this.name} sensor disconnected`);
+        console.log(`${this.name} motion disconnected`);
       }
     });
   }
 
   publish(payload: Buffer) {
-    this.client.publish(
-      this.topic,
-      payload,
-      // JSON.stringify({
-      //   payload,
-      // }),
-    );
+    this.client.publish(this.topic, payload);
   }
 
   handleIncoming(topic: string, payload: object) {}
