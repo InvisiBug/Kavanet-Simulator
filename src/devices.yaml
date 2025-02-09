@@ -92,6 +92,10 @@ plugs:
     controlTopic: Heating Control
     topic: Heating
 
+  - name: bedroomLamp
+    controlTopic: Bed Room Lamp Control
+    topic: Bed Room Lamp
+
   # - name: computerPower
   #   controlTopic: Computer Power Control
   #   topic: Computer Power
@@ -105,11 +109,13 @@ zigbeePlugs:
     controlTopic: zigbee2mqtt/livingRoomLamp/set
     topic: zigbee2mqtt/livingRoomLamp
 
-  - name: BedRoomLamp
-    controlTopic: zigbee2mqtt/bedRoomLamp/set
-    topic: zigbee2mqtt/bedRoomLamp
+  - name: trainingRoomLamp
+    controlTopic: zigbee2mqtt/trainingRoomLamp/set
+    topic: zigbee2mqtt/trainingRoomLamp
 
-  - name: KitchenLamp
+
+
+  - name: kitchenLamp
     controlTopic: zigbee2mqtt/kitchenLamp/set
     topic: zigbee2mqtt/kitchenLamp
 
@@ -125,6 +131,7 @@ zigbeeBulbs:
 zigbeeRGBStrips:
   - name: KitchenStrip
     topic: zigbee2mqtt/kitchenStrip
+    controlTopic: zigbee2mqtt/kitchenStrip/set
     room: kitchen
 
 rgbLights:

@@ -24,7 +24,7 @@ client.subscribe("#", (err) => {
  * Log out all MQTT messages
  */
 client.on("message", (topic, payload) => {
-  console.log(topic.toString(), chalk.yellow(payload.toString()));
+  // console.log(topic.toString(), chalk.yellow(payload.toString()));
 });
 
 client.on("connect", () => console.log("Simulator connected to", mqttUrl));
