@@ -36,8 +36,8 @@ export default class RadiatorBridge {
       try {
         const payload = JSON.parse(rawPayload.toString());
         this.inlet = payload.inlet;
-        this.valve = payload.valve;
-        this.fan = payload.fan;
+        // this.valve = payload.valve;
+        // this.fan = payload.fan;
 
         this.publish();
       } catch (err) {
@@ -49,7 +49,6 @@ export default class RadiatorBridge {
   handleIncoming(topic: String, rawPayload: Object) {
     if (topic === this.controlTopic) {
       const payload = JSON.parse(rawPayload.toString());
-      console.log(payload);
 
       this.fan = payload.fan ? 1 : 0;
       this.valve = payload.valve ? 1 : 0;
